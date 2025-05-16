@@ -27,18 +27,39 @@ public class USER_aboutus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        mainpanel = new javax.swing.JPanel();
+        email_lbl = new javax.swing.JLabel();
+        loginbtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        confirmlbl = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1344, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 756, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        mainpanel.setBackground(new java.awt.Color(238, 235, 235));
+        mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        email_lbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        email_lbl.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl.setText("About Us");
+        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
+
+        loginbtn.setBackground(new java.awt.Color(72, 96, 51));
+        loginbtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loginbtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginbtn.setText("Return");
+        mainpanel.add(loginbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 590, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_login.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        mainpanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 280, 261));
+
+        confirmlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        confirmlbl.setForeground(new java.awt.Color(72, 96, 51));
+        confirmlbl.setText("<html>The Garden Haus is a cozy flower and plant shop dedicated to bringing the beauty of nature into your home and life. We offer a curated selection of fresh flowers, vibrant houseplants, and unique botanical gifts, all handpicked with care. Whether you're looking to brighten a space, find the perfect gift, or grow your indoor jungle, we're here to help you nurture your love for all things green.</html>");
+        mainpanel.add(confirmlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 320, 180));
+
+        getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -94,5 +115,10 @@ public class USER_aboutus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel confirmlbl;
+    private javax.swing.JLabel email_lbl;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton loginbtn;
+    private javax.swing.JPanel mainpanel;
     // End of variables declaration//GEN-END:variables
 }

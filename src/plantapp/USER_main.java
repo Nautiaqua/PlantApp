@@ -1,9 +1,13 @@
 /*
-/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package plantapp;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -27,60 +31,157 @@ public class USER_main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        mainpanel = new javax.swing.JPanel();
+        email_lbl1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        email_lbl = new javax.swing.JLabel();
+        loginbtn1 = new javax.swing.JButton();
+        loginbtn2 = new javax.swing.JButton();
+        email_lbl2 = new javax.swing.JLabel();
+        email_lbl3 = new javax.swing.JLabel();
+        loginbtn3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1344, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 756, Short.MAX_VALUE)
-        );
+        mainpanel.setBackground(new java.awt.Color(238, 235, 235));
+        mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pack();
+        email_lbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_lbl1.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl1.setText("Want to know more about us?");
+        mainpanel.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        mainpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 340, -1));
+
+        email_lbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        email_lbl.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl.setText("Main Menu");
+        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+
+        loginbtn1.setBackground(new java.awt.Color(72, 96, 51));
+        loginbtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loginbtn1.setForeground(new java.awt.Color(255, 255, 255));
+        loginbtn1.setText("Log Out");
+        mainpanel.add(loginbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 300, -1));
+
+        loginbtn2.setBackground(new java.awt.Color(72, 96, 51));
+        loginbtn2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loginbtn2.setForeground(new java.awt.Color(255, 255, 255));
+        loginbtn2.setText("Make an order");
+        mainpanel.add(loginbtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 300, -1));
+
+        email_lbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_lbl2.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl2.setText("Looking to get something?");
+        mainpanel.add(email_lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, -1, -1));
+
+        email_lbl3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_lbl3.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl3.setText("Done for now?");
+        mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, -1, -1));
+
+        loginbtn3.setBackground(new java.awt.Color(72, 96, 51));
+        loginbtn3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loginbtn3.setForeground(new java.awt.Color(255, 255, 255));
+        loginbtn3.setText("About Us");
+        loginbtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginbtn3ActionPerformed(evt);
+            }
+        });
+        mainpanel.add(loginbtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 300, -1));
+
+        getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 400, 760));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/BG_user.png"))); // NOI18N
+        jLabel3.setText("jLabel2");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, -140, -1, -1));
+
+        setSize(new java.awt.Dimension(1063, 765));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtn3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginbtn3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new USER_main().setVisible(true);
+        try {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+            */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(USER_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        });
+            //</editor-fold>
+            //</editor-fold>
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+            
+            
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new USER_main().setVisible(true);
+                }
+            });
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(USER_main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(USER_main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(USER_main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(USER_main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel email_lbl;
+    private javax.swing.JLabel email_lbl1;
+    private javax.swing.JLabel email_lbl2;
+    private javax.swing.JLabel email_lbl3;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loginbtn1;
+    private javax.swing.JButton loginbtn2;
+    private javax.swing.JButton loginbtn3;
+    private javax.swing.JPanel mainpanel;
     // End of variables declaration//GEN-END:variables
 }

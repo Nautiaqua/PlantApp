@@ -4,6 +4,11 @@
  */
 package plantapp;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author WINDOWS
@@ -26,58 +31,148 @@ public class ALL_login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        mainpanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pass_lbl = new javax.swing.JLabel();
+        pass = new javax.swing.JPasswordField();
+        email = new javax.swing.JTextField();
+        email_lbl = new javax.swing.JLabel();
+        signupbtn = new javax.swing.JButton();
+        loginbtn = new javax.swing.JButton();
+        signupbtn1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1344, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 756, Short.MAX_VALUE)
-        );
+        mainpanel.setBackground(new java.awt.Color(238, 235, 235));
+        mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pack();
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_login.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        mainpanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 280, 261));
+
+        pass_lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pass_lbl.setForeground(new java.awt.Color(72, 96, 51));
+        pass_lbl.setText("Password");
+        mainpanel.add(pass_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
+
+        pass.setBackground(new java.awt.Color(255, 255, 255));
+        pass.setForeground(new java.awt.Color(72, 96, 51));
+        mainpanel.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 280, 20));
+
+        email.setBackground(new java.awt.Color(255, 255, 255));
+        email.setForeground(new java.awt.Color(72, 96, 51));
+        mainpanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 280, 20));
+
+        email_lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_lbl.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl.setText("Email");
+        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+
+        signupbtn.setBackground(new java.awt.Color(238, 235, 235));
+        signupbtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        signupbtn.setForeground(new java.awt.Color(72, 96, 51));
+        signupbtn.setText("Want to find out more about us? Click me!");
+        signupbtn.setBorder(null);
+        mainpanel.add(signupbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
+
+        loginbtn.setBackground(new java.awt.Color(72, 96, 51));
+        loginbtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loginbtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginbtn.setText("Login");
+        mainpanel.add(loginbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, -1, -1));
+
+        signupbtn1.setBackground(new java.awt.Color(238, 235, 235));
+        signupbtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        signupbtn1.setForeground(new java.awt.Color(72, 96, 51));
+        signupbtn1.setText("Don't have an account? Create one!");
+        signupbtn1.setBorder(null);
+        mainpanel.add(signupbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, -1, -1));
+
+        getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 400, 760));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/BG_gardenlogin.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-80, -30, -1, -1));
+
+        setSize(new java.awt.Dimension(1063, 765));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ALL_login().setVisible(true);
+        try {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+            */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(ALL_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        });
+            //</editor-fold>
+            //</editor-fold>
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+            
+            
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new ALL_login().setVisible(true);
+                }
+            });
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ALL_login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ALL_login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ALL_login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(ALL_login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField email;
+    private javax.swing.JLabel email_lbl;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loginbtn;
+    private javax.swing.JPanel mainpanel;
+    private javax.swing.JPasswordField pass;
+    private javax.swing.JLabel pass_lbl;
+    private javax.swing.JButton signupbtn;
+    private javax.swing.JButton signupbtn1;
     // End of variables declaration//GEN-END:variables
 }
