@@ -3,16 +3,16 @@ package plantapp;
 import java.sql.*;
 import java.util.logging.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+// import javax.swing.table.DefaultTableModel;
 
 public class connection extends javax.swing.JFrame {
     Connection conn;
     Statement stmt;
     ResultSet rs, cloners;
-    // DefaultTableModel LoginModel=new DefaultTableModel();
+    // DefaultTableModel testtable = new DefaultTableModel();
     
     // (All things we need to add to the db will be added here)
     // String
@@ -37,7 +37,7 @@ public class connection extends javax.swing.JFrame {
             
         }
     }
-    public void Refresh_RS_STMT(){
+    public void RefreshRS(){
         try{
             stmt.close();
             rs.close();
