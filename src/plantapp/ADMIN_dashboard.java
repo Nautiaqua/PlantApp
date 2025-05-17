@@ -180,6 +180,11 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         ALL_login login = new ALL_login();
         this.dispose();
         login.setVisible(true);
+        try {
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_loginbtn1ActionPerformed
 
     private void ordmngrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordmngrActionPerformed
@@ -187,6 +192,11 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         ADMIN_ordermanager ordman = new ADMIN_ordermanager();
         this.dispose();
         ordman.setVisible(true);
+        try {
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ordmngrActionPerformed
 
     private void stockmngrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockmngrActionPerformed
@@ -194,6 +204,11 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         ADMIN_stockmanager stockman = new ADMIN_stockmanager();
         this.dispose();
         stockman.setVisible(true);
+        try {
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_stockmngrActionPerformed
 
     private void ctlgmngrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctlgmngrActionPerformed
@@ -201,6 +216,11 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         ADMIN_cataloguemanager catman = new ADMIN_cataloguemanager();
         this.dispose();
         catman.setVisible(true);
+        try {
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ctlgmngrActionPerformed
 
     private void accrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accrecActionPerformed
@@ -218,6 +238,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 ADMIN_accountrecords accrecs = new ADMIN_accountrecords();
                 this.dispose();
                 accrecs.setVisible(true);
+                dbConn.conn.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Unable to access. You don't have permission.");
             }
@@ -242,6 +263,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 ADMIN_accountsetup acset = new ADMIN_accountsetup();
                 this.dispose();
                 acset.setVisible(true);
+                dbConn.conn.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Unable to access. You don't have permission.");
             }

@@ -163,6 +163,7 @@ public class ALL_login extends javax.swing.JFrame {
                             ADMIN_dashboard dashboard = new ADMIN_dashboard();
                             this.dispose();
                             dashboard.setVisible(true);
+                            dbConn.conn.close();
                         }
                     }
 

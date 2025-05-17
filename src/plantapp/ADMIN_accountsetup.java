@@ -4,8 +4,17 @@
  */
 package plantapp;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -14,13 +23,31 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author WINDOWS
  */
 public class ADMIN_accountsetup extends javax.swing.JFrame {
+    connection dbConn;
     
+    public static boolean namecheck = false,
+                          emailcheck = false,
+                          bdaycheck = false,
+                          cnumcheck = false,
+                          addcheck = false,
+                          passcheck = false;
+                  LocalDate today = LocalDate.now();
+                  SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
+                  // WHAT SORT OF BLACK MAGIC IS THIS?!?!??!11!>!?! ~ nautia
     
-    /**
-     * Creates new form USER_login
-     */
+
     public ADMIN_accountsetup() {
         initComponents();
+        // Button group for admin type
+        typegroup.add(emptype);
+        typegroup.add(mantype);
+        emptype.setSelected(true);
+        
+        // db connection thingy
+        dbConn = new connection();
+        dbConn.ActivateConn();
+        
+        System.out.println("Session email: " + ALL_login.sessionEmail);
     }
 
     /**
@@ -33,26 +60,38 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        typegroup = new javax.swing.ButtonGroup();
         mainpanel = new javax.swing.JPanel();
+        invalid_add = new javax.swing.JLabel();
+        address = new javax.swing.JTextField();
+        confirmlbl1 = new javax.swing.JLabel();
+        cnum = new javax.swing.JTextField();
+        connumlbl = new javax.swing.JLabel();
         confirmlbl = new javax.swing.JLabel();
         confirmpass = new javax.swing.JTextField();
         email_lbl = new javax.swing.JLabel();
         regfinish = new javax.swing.JButton();
         lnamelbl = new javax.swing.JLabel();
         lname = new javax.swing.JTextField();
-        email1 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
         emaillbl = new javax.swing.JLabel();
-        invald_names = new javax.swing.JLabel();
-        bday = new com.toedter.calendar.JDateChooser();
+        invalid_name = new javax.swing.JLabel();
+        bday_chooser = new com.toedter.calendar.JDateChooser();
         fnamelbl = new javax.swing.JLabel();
         pass = new javax.swing.JTextField();
         pass_lbl = new javax.swing.JLabel();
         bdaylbl1 = new javax.swing.JLabel();
         invalid_email = new javax.swing.JLabel();
-        invalid_bday = new javax.swing.JLabel();
+        invalid_birthday = new javax.swing.JLabel();
         invalid_pass = new javax.swing.JLabel();
+        invalid_num = new javax.swing.JLabel();
         invalid_confirm = new javax.swing.JLabel();
+        mantype = new javax.swing.JRadioButton();
+        emptype = new javax.swing.JRadioButton();
+        confirmlbl2 = new javax.swing.JLabel();
+        clearbtn = new javax.swing.JButton();
+        returnbtn1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -73,10 +112,47 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         mainpanel.setBackground(new java.awt.Color(238, 235, 235));
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        invalid_add.setForeground(new java.awt.Color(158, 31, 31));
+        mainpanel.add(invalid_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
+
+        address.setBackground(new java.awt.Color(255, 255, 255));
+        address.setForeground(new java.awt.Color(72, 96, 51));
+        address.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressActionPerformed(evt);
+            }
+        });
+        mainpanel.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 280, 20));
+
+        confirmlbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        confirmlbl1.setForeground(new java.awt.Color(72, 96, 51));
+        confirmlbl1.setText("Account Type");
+        mainpanel.add(confirmlbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, -1, -1));
+
+        cnum.setBackground(new java.awt.Color(255, 255, 255));
+        cnum.setForeground(new java.awt.Color(72, 96, 51));
+        cnum.setText("09");
+        cnum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cnumActionPerformed(evt);
+            }
+        });
+        cnum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cnumKeyReleased(evt);
+            }
+        });
+        mainpanel.add(cnum, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 280, 20));
+
+        connumlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        connumlbl.setForeground(new java.awt.Color(72, 96, 51));
+        connumlbl.setText("Contact Number");
+        mainpanel.add(connumlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
+
         confirmlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         confirmlbl.setForeground(new java.awt.Color(72, 96, 51));
-        confirmlbl.setText("Confirm Password");
-        mainpanel.add(confirmlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, -1, -1));
+        confirmlbl.setText("Address");
+        mainpanel.add(confirmlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
 
         confirmpass.setBackground(new java.awt.Color(255, 255, 255));
         confirmpass.setForeground(new java.awt.Color(72, 96, 51));
@@ -85,31 +161,36 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
                 confirmpassActionPerformed(evt);
             }
         });
-        mainpanel.add(confirmpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, 280, 20));
+        mainpanel.add(confirmpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 280, 20));
 
         email_lbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         email_lbl.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl.setText("Admin Account Setup");
-        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         regfinish.setBackground(new java.awt.Color(72, 96, 51));
         regfinish.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         regfinish.setForeground(new java.awt.Color(255, 255, 255));
         regfinish.setText("Finish");
-        mainpanel.add(regfinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, -1, -1));
+        regfinish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regfinishActionPerformed(evt);
+            }
+        });
+        mainpanel.add(regfinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 580, -1, -1));
 
         lnamelbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lnamelbl.setForeground(new java.awt.Color(72, 96, 51));
         lnamelbl.setText("Last Name");
-        mainpanel.add(lnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, -1));
+        mainpanel.add(lnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
 
         lname.setBackground(new java.awt.Color(255, 255, 255));
         lname.setForeground(new java.awt.Color(72, 96, 51));
-        mainpanel.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 130, 20));
+        mainpanel.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 130, 20));
 
-        email1.setBackground(new java.awt.Color(255, 255, 255));
-        email1.setForeground(new java.awt.Color(72, 96, 51));
-        mainpanel.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 280, 20));
+        email.setBackground(new java.awt.Color(255, 255, 255));
+        email.setForeground(new java.awt.Color(72, 96, 51));
+        mainpanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 280, 20));
 
         fname.setBackground(new java.awt.Color(255, 255, 255));
         fname.setForeground(new java.awt.Color(72, 96, 51));
@@ -118,25 +199,24 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
                 fnameActionPerformed(evt);
             }
         });
-        mainpanel.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 130, 20));
+        mainpanel.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 130, 20));
 
         emaillbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         emaillbl.setForeground(new java.awt.Color(72, 96, 51));
         emaillbl.setText("Email");
-        mainpanel.add(emaillbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
+        mainpanel.add(emaillbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
-        invald_names.setForeground(new java.awt.Color(158, 31, 31));
-        invald_names.setText("Either fields cannot be empty.");
-        mainpanel.add(invald_names, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, -1, -1));
+        invalid_name.setForeground(new java.awt.Color(158, 31, 31));
+        mainpanel.add(invalid_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
 
-        bday.setBackground(new java.awt.Color(255, 255, 255));
-        bday.setForeground(new java.awt.Color(72, 96, 51));
-        mainpanel.add(bday, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 280, 20));
+        bday_chooser.setBackground(new java.awt.Color(255, 255, 255));
+        bday_chooser.setForeground(new java.awt.Color(72, 96, 51));
+        mainpanel.add(bday_chooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 280, 20));
 
         fnamelbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         fnamelbl.setForeground(new java.awt.Color(72, 96, 51));
         fnamelbl.setText("First Name");
-        mainpanel.add(fnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
+        mainpanel.add(fnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         pass.setBackground(new java.awt.Color(255, 255, 255));
         pass.setForeground(new java.awt.Color(72, 96, 51));
@@ -145,33 +225,67 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
                 passActionPerformed(evt);
             }
         });
-        mainpanel.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 280, 20));
+        mainpanel.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 280, 20));
 
         pass_lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pass_lbl.setForeground(new java.awt.Color(72, 96, 51));
         pass_lbl.setText("Password");
-        mainpanel.add(pass_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, -1));
+        mainpanel.add(pass_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, -1, -1));
 
         bdaylbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bdaylbl1.setForeground(new java.awt.Color(72, 96, 51));
         bdaylbl1.setText("Birthday");
-        mainpanel.add(bdaylbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        mainpanel.add(bdaylbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
 
         invalid_email.setForeground(new java.awt.Color(158, 31, 31));
-        invalid_email.setText("Must be a valid email.");
-        mainpanel.add(invalid_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, -1, -1));
+        mainpanel.add(invalid_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
 
-        invalid_bday.setForeground(new java.awt.Color(158, 31, 31));
-        invalid_bday.setText("Must be 16 or older.");
-        mainpanel.add(invalid_bday, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, -1, -1));
+        invalid_birthday.setForeground(new java.awt.Color(158, 31, 31));
+        mainpanel.add(invalid_birthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, -1, -1));
 
         invalid_pass.setForeground(new java.awt.Color(158, 31, 31));
-        invalid_pass.setText("Must be 8 to 12 characters.");
-        mainpanel.add(invalid_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, -1));
+        mainpanel.add(invalid_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
+
+        invalid_num.setForeground(new java.awt.Color(158, 31, 31));
+        mainpanel.add(invalid_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
 
         invalid_confirm.setForeground(new java.awt.Color(158, 31, 31));
-        invalid_confirm.setText("Must match password.");
-        mainpanel.add(invalid_confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
+        mainpanel.add(invalid_confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, -1, -1));
+
+        mantype.setForeground(new java.awt.Color(80, 51, 39));
+        mantype.setText("Manager");
+        mainpanel.add(mantype, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, -1, -1));
+
+        emptype.setForeground(new java.awt.Color(80, 51, 39));
+        emptype.setText("Employee");
+        mainpanel.add(emptype, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, -1, -1));
+
+        confirmlbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        confirmlbl2.setForeground(new java.awt.Color(72, 96, 51));
+        confirmlbl2.setText("Confirm Password");
+        mainpanel.add(confirmlbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
+
+        clearbtn.setBackground(new java.awt.Color(72, 96, 51));
+        clearbtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clearbtn.setForeground(new java.awt.Color(255, 255, 255));
+        clearbtn.setText("Return");
+        clearbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearbtnActionPerformed(evt);
+            }
+        });
+        mainpanel.add(clearbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, -1, -1));
+
+        returnbtn1.setBackground(new java.awt.Color(72, 96, 51));
+        returnbtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        returnbtn1.setForeground(new java.awt.Color(255, 255, 255));
+        returnbtn1.setText("Clear");
+        returnbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnbtn1ActionPerformed(evt);
+            }
+        });
+        mainpanel.add(returnbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, -1, -1));
 
         getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
@@ -194,6 +308,158 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
     private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fnameActionPerformed
+
+    private void regfinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regfinishActionPerformed
+        // TODO add your handling code here:
+        
+        // Namecheck
+        if (fname.getText().isEmpty() || lname.getText().isEmpty()) {
+            invalid_name.setText("Either fields cannot be empty.");
+        } else {
+            System.out.println("Name is done!");
+            namecheck = true;
+            invalid_name.setText(null);
+        }
+        
+        // Emailcheck
+        if (email.getText().isEmpty()) {
+            invalid_email.setText("Must be a valid email");
+        } else if (email.getText().equals("@gmail.com") || !email.getText().endsWith("@gmail.com")) {
+            invalid_email.setText("Must be a valid email");
+        } else {
+            emailcheck = true;
+            invalid_email.setText(null);
+        }
+        
+        // Bdaycheck
+        if (bday_chooser.getDate() == null) {
+            invalid_birthday.setText("Must be 18 or older.");
+        } else if (bday_chooser.getDate() != null) {
+            LocalDate bday = bday_chooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (ChronoUnit.YEARS.between(bday, today) >= 18) {
+                bdaycheck = true; 
+                invalid_birthday.setText(null);
+            } else if (ChronoUnit.YEARS.between(bday, today) < 18) {
+                invalid_birthday.setText("Must be 18 or older.");
+            }
+        }
+        
+        // Contact number check
+        if (cnum.getText().length() < 11) {
+            invalid_num.setText("Must contain 11 digits.");
+        } else if (cnum.getText().length() == 11) {
+            cnumcheck = true;
+            invalid_num.setText(null);
+        }
+        
+        // Address check
+        if (address.getText().isEmpty()) {
+            invalid_add.setText("Must not be empty.");
+        } else if (!address.getText().isEmpty()) {
+            addcheck = true;
+            invalid_add.setText(null);
+        }
+        
+        // Password check
+        if (pass.getText().length() < 8 || pass.getText().length() > 20) {
+            invalid_pass.setText("Must be 8 to 20 characters.");
+        } else {
+            invalid_pass.setText(null);
+            if (!confirmpass.getText().equals(pass.getText())) {
+                invalid_confirm.setText("Must match password.");
+            } else {
+                passcheck = true;
+                invalid_confirm.setText(null);
+            }
+        }
+        
+        // NOW FOR THE FUNKY PART HEHE ~ nautia
+        
+        String inputEmail = email.getText(),
+               inputPass = pass.getText(),
+               inputFname = fname.getText(),
+               inputLname = lname.getText(),
+               inputAddress = address.getText(),
+               inputCnum = cnum.getText(),
+               inputType = "EMPLOYEE"; // Employee by default,
+        
+        java.sql.Date inputBday = new java.sql.Date(bday_chooser.getDate().getTime());
+        
+        
+        if (mantype.isSelected()) { 
+            inputType = "MANAGER";
+        } else {
+            inputType = "EMPLOYEE";
+        }
+        
+        
+        if (namecheck && emailcheck && bdaycheck && cnumcheck && addcheck && passcheck) {
+            try {
+                System.out.println("Beginning  query process!");
+                
+                String stmt = "INSERT INTO ACCOUNTS (EMAIL, PASSWORD, FIRSTNAME, LASTNAME, BIRTHDATE, ADDRESS, CONTACTNUM, ACC_TYPE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = dbConn.conn.prepareStatement(stmt);
+                pstmt.setString(1, inputEmail);
+                pstmt.setString(2, inputPass);
+                pstmt.setString(3, inputFname);
+                pstmt.setString(4, inputLname);
+                pstmt.setDate(5, inputBday);
+                pstmt.setString(6, inputAddress);
+                pstmt.setString(7, inputCnum);
+                pstmt.setString(8, inputType);
+                
+                pstmt.executeUpdate();
+                dbConn.conn.commit();
+                
+                JOptionPane.showMessageDialog(null, "Insert successful.");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ADMIN_accountsetup.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+    }//GEN-LAST:event_regfinishActionPerformed
+
+    private void cnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cnumActionPerformed
+
+    private void cnumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cnumKeyReleased
+        // TODO add your handling code here:
+        if ("9".equals(cnum.getText()) || "0".equals(cnum.getText()) || cnum.getText().isEmpty()) {
+            cnum.setText("09");
+        }
+    }//GEN-LAST:event_cnumKeyReleased
+
+    private void addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressActionPerformed
+
+    private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
+        // TODO add your handling code here:
+        ADMIN_dashboard dashboard = new ADMIN_dashboard();
+        this.dispose();
+        dashboard.setVisible(true);
+        try {
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_accountsetup.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_clearbtnActionPerformed
+
+    private void returnbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtn1ActionPerformed
+        // TODO add your handling code here:
+        fname.setText(null);
+        lname.setText(null);
+        email.setText(null);
+        bday_chooser.setDate(null);
+        pass.setText(null);
+        confirmpass.setText(null);
+        address.setText(null);
+        cnum.setText("09");
+        emptype.setSelected(true);
+    }//GEN-LAST:event_returnbtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,27 +512,39 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser bday;
+    private javax.swing.JTextField address;
+    private com.toedter.calendar.JDateChooser bday_chooser;
     private javax.swing.JLabel bdaylbl1;
+    private javax.swing.JButton clearbtn;
+    private javax.swing.JTextField cnum;
     private javax.swing.JLabel confirmlbl;
+    private javax.swing.JLabel confirmlbl1;
+    private javax.swing.JLabel confirmlbl2;
     private javax.swing.JTextField confirmpass;
-    private javax.swing.JTextField email1;
+    private javax.swing.JLabel connumlbl;
+    private javax.swing.JTextField email;
     private javax.swing.JLabel email_lbl;
     private javax.swing.JLabel emaillbl;
+    private javax.swing.JRadioButton emptype;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel fnamelbl;
-    private javax.swing.JLabel invald_names;
-    private javax.swing.JLabel invalid_bday;
+    private javax.swing.JLabel invalid_add;
+    private javax.swing.JLabel invalid_birthday;
     private javax.swing.JLabel invalid_confirm;
     private javax.swing.JLabel invalid_email;
+    private javax.swing.JLabel invalid_name;
+    private javax.swing.JLabel invalid_num;
     private javax.swing.JLabel invalid_pass;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lname;
     private javax.swing.JLabel lnamelbl;
     private javax.swing.JPanel mainpanel;
+    private javax.swing.JRadioButton mantype;
     private javax.swing.JTextField pass;
     private javax.swing.JLabel pass_lbl;
     private javax.swing.JButton regfinish;
+    private javax.swing.JButton returnbtn1;
+    private javax.swing.ButtonGroup typegroup;
     // End of variables declaration//GEN-END:variables
 }
