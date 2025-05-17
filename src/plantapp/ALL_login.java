@@ -26,7 +26,7 @@ public class ALL_login extends javax.swing.JFrame {
         initComponents();
         
         // Instantiates and connects to the DB.
-        connection dbConn = new connection();
+        dbConn = new connection();
         dbConn.ActivateConn();
     }
 
@@ -70,7 +70,6 @@ public class ALL_login extends javax.swing.JFrame {
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         invalid.setForeground(new java.awt.Color(158, 31, 31));
-        invalid.setText("Invalid Email or Password.");
         mainpanel.add(invalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, 20));
 
         email_lbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -126,25 +125,33 @@ public class ALL_login extends javax.swing.JFrame {
         try {
             String inputEmail = email.getText();
             String inputPass = pass.getText();
+            boolean emcheck = true, 
+                    passcheck = true;
+            // this is code remnants but i dont wanna delete it or else something will implode xd ~ nautia
             
-            // Estmt gets the email, Pstmt gets the password.
-            String Estmt = "SELECT EMAIL FROM ACCOUNTS WHERE EMAIL = ? AND PASSWORD = ?";
-            PreparedStatement Epstmt = dbConn.conn.prepareStatement(Estmt);
-            Epstmt.setString(1, inputEmail);
-            Epstmt.setString(2, inputPass);
-            
-            ResultSet rs = Epstmt.executeQuery();
-            
-            
-            
-            if(rs.next()) {
-                String foundEmail = rs.getString("EMAIL");
-                if (foundEmail.equals(inputEmail)) {
+            if (emcheck && passcheck) {
+                String stmt = "SELECT EMAIL, PASSWORD FROM ACCOUNTS WHERE EMAIL = ? AND PASSWORD = ?";
+                PreparedStatement pstmt = dbConn.conn.prepareStatement(stmt);
+                pstmt.setString(1, inputEmail);
+                pstmt.setString(2, inputPass);
+
+                ResultSet rs = pstmt.executeQuery();
+
+                if(rs.next()) {
+                    String foundEmail = rs.getString("EMAIL");
+                    String foundPassword = rs.getString("PASSWORD");
                     
+                    if (foundEmail.equals(inputEmail)) {
+                        if (foundPassword.equals(inputPass)) {
+                            sessionEmail = foundEmail;
+                            System.out.println("Logged in! Session email is: " + sessionEmail + " " + foundPassword);
+                        }
+                    }
+
+                } else {
+                    invalid.setText("Invalid Email or Password.");
+                    System.out.println("You might have an invalid password or email.");
                 }
-                
-            } else {
-                invalid.setText("Invalid Email or Password.");
             }
             
         } catch (SQLException ex) {
