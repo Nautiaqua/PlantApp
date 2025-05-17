@@ -43,6 +43,7 @@ public class ALL_login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         mainpanel = new javax.swing.JPanel();
+        dev_button = new javax.swing.JButton();
         invalid = new javax.swing.JLabel();
         email_lbl1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -70,6 +71,17 @@ public class ALL_login extends javax.swing.JFrame {
 
         mainpanel.setBackground(new java.awt.Color(238, 235, 235));
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dev_button.setBackground(new java.awt.Color(72, 96, 51));
+        dev_button.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dev_button.setForeground(new java.awt.Color(255, 255, 255));
+        dev_button.setText("dev quick login");
+        dev_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dev_buttonActionPerformed(evt);
+            }
+        });
+        mainpanel.add(dev_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, 150, -1));
 
         invalid.setForeground(new java.awt.Color(158, 31, 31));
         mainpanel.add(invalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, 20));
@@ -165,6 +177,12 @@ public class ALL_login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginbtnActionPerformed
 
+    private void dev_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dev_buttonActionPerformed
+        // TODO add your handling code here:
+        email.setText("test@gmail.com");
+        pass.setText("password");
+    }//GEN-LAST:event_dev_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,6 +233,7 @@ public class ALL_login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton dev_button;
     private javax.swing.JTextField email;
     private javax.swing.JLabel email_lbl;
     private javax.swing.JLabel email_lbl1;

@@ -46,13 +46,13 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         email_lbl = new javax.swing.JLabel();
         loginbtn1 = new javax.swing.JButton();
-        loginbtn2 = new javax.swing.JButton();
+        ctlgmngr = new javax.swing.JButton();
         email_lbl2 = new javax.swing.JLabel();
         email_lbl3 = new javax.swing.JLabel();
-        loginbtn5 = new javax.swing.JButton();
-        loginbtn6 = new javax.swing.JButton();
-        loginbtn7 = new javax.swing.JButton();
-        loginbtn3 = new javax.swing.JButton();
+        accrec = new javax.swing.JButton();
+        adacc = new javax.swing.JButton();
+        ordmngr = new javax.swing.JButton();
+        stockmngr = new javax.swing.JButton();
         email_lbl1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -94,11 +94,16 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         });
         mainpanel.add(loginbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 300, -1));
 
-        loginbtn2.setBackground(new java.awt.Color(72, 96, 51));
-        loginbtn2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loginbtn2.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn2.setText("Catalogue Manager");
-        mainpanel.add(loginbtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 300, -1));
+        ctlgmngr.setBackground(new java.awt.Color(72, 96, 51));
+        ctlgmngr.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ctlgmngr.setForeground(new java.awt.Color(255, 255, 255));
+        ctlgmngr.setText("Catalogue Manager");
+        ctlgmngr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ctlgmngrActionPerformed(evt);
+            }
+        });
+        mainpanel.add(ctlgmngr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 300, -1));
 
         email_lbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl2.setForeground(new java.awt.Color(72, 96, 51));
@@ -110,34 +115,49 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         email_lbl3.setText("Done with work?");
         mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
-        loginbtn5.setBackground(new java.awt.Color(72, 96, 51));
-        loginbtn5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loginbtn5.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn5.setText("Account Records");
-        mainpanel.add(loginbtn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 300, -1));
-
-        loginbtn6.setBackground(new java.awt.Color(72, 96, 51));
-        loginbtn6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loginbtn6.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn6.setText("Create an Admin Account");
-        mainpanel.add(loginbtn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 300, -1));
-
-        loginbtn7.setBackground(new java.awt.Color(72, 96, 51));
-        loginbtn7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loginbtn7.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn7.setText("Order Manager");
-        loginbtn7.addActionListener(new java.awt.event.ActionListener() {
+        accrec.setBackground(new java.awt.Color(72, 96, 51));
+        accrec.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        accrec.setForeground(new java.awt.Color(255, 255, 255));
+        accrec.setText("Account Records");
+        accrec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginbtn7ActionPerformed(evt);
+                accrecActionPerformed(evt);
             }
         });
-        mainpanel.add(loginbtn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 300, -1));
+        mainpanel.add(accrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 300, -1));
 
-        loginbtn3.setBackground(new java.awt.Color(72, 96, 51));
-        loginbtn3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loginbtn3.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn3.setText("Stock Manager");
-        mainpanel.add(loginbtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 300, -1));
+        adacc.setBackground(new java.awt.Color(72, 96, 51));
+        adacc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        adacc.setForeground(new java.awt.Color(255, 255, 255));
+        adacc.setText("Create an Admin Account");
+        adacc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adaccActionPerformed(evt);
+            }
+        });
+        mainpanel.add(adacc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 300, -1));
+
+        ordmngr.setBackground(new java.awt.Color(72, 96, 51));
+        ordmngr.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ordmngr.setForeground(new java.awt.Color(255, 255, 255));
+        ordmngr.setText("Order Manager");
+        ordmngr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordmngrActionPerformed(evt);
+            }
+        });
+        mainpanel.add(ordmngr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 300, -1));
+
+        stockmngr.setBackground(new java.awt.Color(72, 96, 51));
+        stockmngr.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        stockmngr.setForeground(new java.awt.Color(255, 255, 255));
+        stockmngr.setText("Stock Manager");
+        stockmngr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockmngrActionPerformed(evt);
+            }
+        });
+        mainpanel.add(stockmngr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 300, -1));
 
         email_lbl1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         email_lbl1.setForeground(new java.awt.Color(72, 96, 51));
@@ -161,9 +181,53 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_loginbtn1ActionPerformed
 
-    private void loginbtn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtn7ActionPerformed
+    private void ordmngrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordmngrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loginbtn7ActionPerformed
+        ADMIN_ordermanager ordman = new ADMIN_ordermanager();
+        this.dispose();
+        ordman.setVisible(true);
+    }//GEN-LAST:event_ordmngrActionPerformed
+
+    private void stockmngrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockmngrActionPerformed
+        // TODO add your handling code here:
+        ADMIN_stockmanager stockman = new ADMIN_stockmanager();
+        this.dispose();
+        stockman.setVisible(true);
+    }//GEN-LAST:event_stockmngrActionPerformed
+
+    private void ctlgmngrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctlgmngrActionPerformed
+        // TODO add your handling code here:
+        ADMIN_cataloguemanager catman = new ADMIN_cataloguemanager();
+        this.dispose();
+        catman.setVisible(true);
+    }//GEN-LAST:event_ctlgmngrActionPerformed
+
+    private void accrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accrecActionPerformed
+        // TODO add your handling code here:
+        try {
+            String stmt = "SELECT ACC_TYPE FROM ACCOUNTS WHERE EMAIL = ?";
+            PreparedStatement pstmt = dbConn.conn.prepareStatement(stmt);
+            pstmt.setString(1, ALL_login.sessionEmail);
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        ADMIN_accountrecords accrecs = new ADMIN_accountrecords();
+        this.dispose();
+        accrecs.setVisible(true);
+    }//GEN-LAST:event_accrecActionPerformed
+
+    private void adaccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adaccActionPerformed
+        // TODO add your handling code here:
+        ADMIN_accountsetup acset = new ADMIN_accountsetup();
+        this.dispose();
+        acset.setVisible(true);
+    }//GEN-LAST:event_adaccActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,6 +279,9 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton accrec;
+    private javax.swing.JButton adacc;
+    private javax.swing.JButton ctlgmngr;
     private javax.swing.JLabel email_lbl;
     private javax.swing.JLabel email_lbl1;
     private javax.swing.JLabel email_lbl2;
@@ -223,11 +290,8 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginbtn1;
-    private javax.swing.JButton loginbtn2;
-    private javax.swing.JButton loginbtn3;
-    private javax.swing.JButton loginbtn5;
-    private javax.swing.JButton loginbtn6;
-    private javax.swing.JButton loginbtn7;
     private javax.swing.JPanel mainpanel;
+    private javax.swing.JButton ordmngr;
+    private javax.swing.JButton stockmngr;
     // End of variables declaration//GEN-END:variables
 }
