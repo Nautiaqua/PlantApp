@@ -39,10 +39,11 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         loginbtn2 = new javax.swing.JButton();
         email_lbl2 = new javax.swing.JLabel();
         email_lbl3 = new javax.swing.JLabel();
-        loginbtn4 = new javax.swing.JButton();
         loginbtn5 = new javax.swing.JButton();
         loginbtn6 = new javax.swing.JButton();
         loginbtn7 = new javax.swing.JButton();
+        loginbtn3 = new javax.swing.JButton();
+        email_lbl1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -65,12 +66,12 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        mainpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 340, -1));
+        mainpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 340, -1));
 
-        email_lbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        email_lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         email_lbl.setForeground(new java.awt.Color(72, 96, 51));
-        email_lbl.setText("Portal Dashboard");
-        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        email_lbl.setText("Employee Portal");
+        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, 30));
 
         loginbtn1.setBackground(new java.awt.Color(72, 96, 51));
         loginbtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -81,8 +82,8 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         loginbtn2.setBackground(new java.awt.Color(72, 96, 51));
         loginbtn2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn2.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn2.setText("Stock Manager");
-        mainpanel.add(loginbtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 300, -1));
+        loginbtn2.setText("Catalogue Manager");
+        mainpanel.add(loginbtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 300, -1));
 
         email_lbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl2.setForeground(new java.awt.Color(72, 96, 51));
@@ -94,29 +95,34 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         email_lbl3.setText("Done with work?");
         mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
-        loginbtn4.setBackground(new java.awt.Color(72, 96, 51));
-        loginbtn4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loginbtn4.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn4.setText("Make an order");
-        mainpanel.add(loginbtn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 300, -1));
-
         loginbtn5.setBackground(new java.awt.Color(72, 96, 51));
         loginbtn5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn5.setForeground(new java.awt.Color(255, 255, 255));
         loginbtn5.setText("Account Records");
-        mainpanel.add(loginbtn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 300, -1));
+        mainpanel.add(loginbtn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 300, -1));
 
         loginbtn6.setBackground(new java.awt.Color(72, 96, 51));
         loginbtn6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn6.setForeground(new java.awt.Color(255, 255, 255));
         loginbtn6.setText("Create an Admin Account");
-        mainpanel.add(loginbtn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 300, -1));
+        mainpanel.add(loginbtn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 300, -1));
 
         loginbtn7.setBackground(new java.awt.Color(72, 96, 51));
         loginbtn7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn7.setForeground(new java.awt.Color(255, 255, 255));
-        loginbtn7.setText("Order Tracker");
-        mainpanel.add(loginbtn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 300, -1));
+        loginbtn7.setText("Order Manager");
+        mainpanel.add(loginbtn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 300, -1));
+
+        loginbtn3.setBackground(new java.awt.Color(72, 96, 51));
+        loginbtn3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loginbtn3.setForeground(new java.awt.Color(255, 255, 255));
+        loginbtn3.setText("Stock Manager");
+        mainpanel.add(loginbtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 300, -1));
+
+        email_lbl1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        email_lbl1.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl1.setText("Portal Dashboard");
+        mainpanel.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
         getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
@@ -179,6 +185,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel email_lbl;
+    private javax.swing.JLabel email_lbl1;
     private javax.swing.JLabel email_lbl2;
     private javax.swing.JLabel email_lbl3;
     private javax.swing.JLabel jLabel2;
@@ -186,7 +193,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginbtn1;
     private javax.swing.JButton loginbtn2;
-    private javax.swing.JButton loginbtn4;
+    private javax.swing.JButton loginbtn3;
     private javax.swing.JButton loginbtn5;
     private javax.swing.JButton loginbtn6;
     private javax.swing.JButton loginbtn7;

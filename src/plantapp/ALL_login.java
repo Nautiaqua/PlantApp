@@ -20,6 +20,10 @@ public class ALL_login extends javax.swing.JFrame {
      */
     public ALL_login() {
         initComponents();
+        
+        // Instantiates and connects to the DB.
+        connection dbConn = new connection();
+        dbConn.ActivateConn();
     }
 
     /**
@@ -33,14 +37,13 @@ public class ALL_login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         mainpanel = new javax.swing.JPanel();
+        email_lbl1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pass_lbl = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
         email = new javax.swing.JTextField();
         email_lbl = new javax.swing.JLabel();
-        signupbtn = new javax.swing.JButton();
         loginbtn = new javax.swing.JButton();
-        signupbtn1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -61,53 +64,44 @@ public class ALL_login extends javax.swing.JFrame {
         mainpanel.setBackground(new java.awt.Color(238, 235, 235));
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        email_lbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        email_lbl1.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl1.setText("Employee Portal");
+        mainpanel.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, -1, 20));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_login.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        mainpanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 280, 261));
+        mainpanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 280, 260));
 
         pass_lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pass_lbl.setForeground(new java.awt.Color(72, 96, 51));
         pass_lbl.setText("Password");
-        mainpanel.add(pass_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
+        mainpanel.add(pass_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, -1, -1));
 
         pass.setBackground(new java.awt.Color(255, 255, 255));
         pass.setForeground(new java.awt.Color(72, 96, 51));
-        mainpanel.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 280, 20));
+        mainpanel.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 280, 20));
 
         email.setBackground(new java.awt.Color(255, 255, 255));
         email.setForeground(new java.awt.Color(72, 96, 51));
-        mainpanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 280, 20));
+        mainpanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 280, 20));
 
         email_lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl.setText("Email");
-        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
-
-        signupbtn.setBackground(new java.awt.Color(238, 235, 235));
-        signupbtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        signupbtn.setForeground(new java.awt.Color(72, 96, 51));
-        signupbtn.setText("Want to find out more about us? Click me!");
-        signupbtn.setBorder(null);
-        mainpanel.add(signupbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
+        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
         loginbtn.setBackground(new java.awt.Color(72, 96, 51));
         loginbtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn.setForeground(new java.awt.Color(255, 255, 255));
         loginbtn.setText("Login");
-        mainpanel.add(loginbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, -1, -1));
+        mainpanel.add(loginbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, -1, -1));
 
-        signupbtn1.setBackground(new java.awt.Color(238, 235, 235));
-        signupbtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        signupbtn1.setForeground(new java.awt.Color(72, 96, 51));
-        signupbtn1.setText("Don't have an account? Create one!");
-        signupbtn1.setBorder(null);
-        mainpanel.add(signupbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, -1, -1));
-
-        getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 400, 760));
+        getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/BG_gardenlogin.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-80, -30, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, -20, -1, -1));
 
         setSize(new java.awt.Dimension(1063, 765));
         setLocationRelativeTo(null);
@@ -165,6 +159,7 @@ public class ALL_login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField email;
     private javax.swing.JLabel email_lbl;
+    private javax.swing.JLabel email_lbl1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -172,7 +167,5 @@ public class ALL_login extends javax.swing.JFrame {
     private javax.swing.JPanel mainpanel;
     private javax.swing.JPasswordField pass;
     private javax.swing.JLabel pass_lbl;
-    private javax.swing.JButton signupbtn;
-    private javax.swing.JButton signupbtn1;
     // End of variables declaration//GEN-END:variables
 }
