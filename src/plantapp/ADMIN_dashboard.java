@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.*;
 
 /**
  *
@@ -210,23 +211,44 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
             pstmt.setString(1, ALL_login.sessionEmail);
             
             ResultSet rs = pstmt.executeQuery();
+            String sessionAccType = rs.getString("ACC_TYPE");
             
-            
+            if (sessionAccType.equals("MANAGER")) {
+                System.out.println("Welcome Manager!");
+                ADMIN_accountrecords accrecs = new ADMIN_accountrecords();
+                this.dispose();
+                accrecs.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Unable to access. You don't have permission.");
+            }
             
         } catch (SQLException ex) {
             Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        ADMIN_accountrecords accrecs = new ADMIN_accountrecords();
-        this.dispose();
-        accrecs.setVisible(true);
     }//GEN-LAST:event_accrecActionPerformed
 
     private void adaccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adaccActionPerformed
         // TODO add your handling code here:
-        ADMIN_accountsetup acset = new ADMIN_accountsetup();
-        this.dispose();
-        acset.setVisible(true);
+        try {
+            String stmt = "SELECT ACC_TYPE FROM ACCOUNTS WHERE EMAIL = ?";
+            PreparedStatement pstmt = dbConn.conn.prepareStatement(stmt);
+            pstmt.setString(1, ALL_login.sessionEmail);
+            
+            ResultSet rs = pstmt.executeQuery();
+            String sessionAccType = rs.getString("ACC_TYPE");
+            
+            if (sessionAccType.equals("MANAGER")) {
+                System.out.println("Welcome Manager!");
+                ADMIN_accountsetup acset = new ADMIN_accountsetup();
+                this.dispose();
+                acset.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Unable to access. You don't have permission.");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_adaccActionPerformed
 
     /**
