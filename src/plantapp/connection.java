@@ -29,6 +29,7 @@ public class connection extends javax.swing.JFrame {
             String sql = "SELECT * FROM ACCOUNTS";  // make sure this table exists
             rs = stmt.executeQuery(sql);
             
+            System.out.println(" ");
             System.out.println(rs);
 
         System.out.println("Connected to SQLite database successfully.");

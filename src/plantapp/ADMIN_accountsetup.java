@@ -113,6 +113,11 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
 
         fname.setBackground(new java.awt.Color(255, 255, 255));
         fname.setForeground(new java.awt.Color(72, 96, 51));
+        fname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnameActionPerformed(evt);
+            }
+        });
         mainpanel.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 130, 20));
 
         emaillbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -185,6 +190,10 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
     private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passActionPerformed
+
+    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnameActionPerformed
 
     /**
      * @param args the command line arguments

@@ -19,11 +19,13 @@ import java.sql.ResultSet;
 public class ALL_login extends javax.swing.JFrame {
     connection dbConn;
     public static String sessionEmail;
-    /**
-     * Creates new form USER_login
-     */
+
     public ALL_login() {
         initComponents();
+        
+        // empties current session email when log out is pressed.
+        sessionEmail = null;
+        System.out.println("Initialized session email: " + sessionEmail);
         
         // Instantiates and connects to the DB.
         dbConn = new connection();
@@ -144,7 +146,11 @@ public class ALL_login extends javax.swing.JFrame {
                     if (foundEmail.equals(inputEmail)) {
                         if (foundPassword.equals(inputPass)) {
                             sessionEmail = foundEmail;
-                            System.out.println("Logged in! Session email is: " + sessionEmail + " " + foundPassword);
+                            System.out.println("Logged in! Session email is: " + sessionEmail + ", " + foundPassword);
+                            
+                            ADMIN_dashboard dashboard = new ADMIN_dashboard();
+                            this.dispose();
+                            dashboard.setVisible(true);
                         }
                     }
 

@@ -4,22 +4,32 @@
  */
 package plantapp;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
  * @author WINDOWS
  */
 public class ADMIN_dashboard extends javax.swing.JFrame {
+    connection dbConn;
 
     /**
      * Creates new form USER_login
      */
     public ADMIN_dashboard() {
         initComponents();
+        
+        // Connects once again!
+        dbConn = new connection();
+        dbConn.ActivateConn();
+        
+        System.out.println("Session email: " + ALL_login.sessionEmail);
     }
 
     /**
@@ -77,6 +87,11 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         loginbtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn1.setForeground(new java.awt.Color(255, 255, 255));
         loginbtn1.setText("Log Out");
+        loginbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginbtn1ActionPerformed(evt);
+            }
+        });
         mainpanel.add(loginbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 300, -1));
 
         loginbtn2.setBackground(new java.awt.Color(72, 96, 51));
@@ -111,6 +126,11 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         loginbtn7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn7.setForeground(new java.awt.Color(255, 255, 255));
         loginbtn7.setText("Order Manager");
+        loginbtn7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginbtn7ActionPerformed(evt);
+            }
+        });
         mainpanel.add(loginbtn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 300, -1));
 
         loginbtn3.setBackground(new java.awt.Color(72, 96, 51));
@@ -133,6 +153,17 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1063, 765));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtn1ActionPerformed
+        // TODO add your handling code here:
+        ALL_login login = new ALL_login();
+        this.dispose();
+        login.setVisible(true);
+    }//GEN-LAST:event_loginbtn1ActionPerformed
+
+    private void loginbtn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtn7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginbtn7ActionPerformed
 
     /**
      * @param args the command line arguments
