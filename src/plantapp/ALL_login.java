@@ -4,17 +4,21 @@
  */
 package plantapp;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
  * @author WINDOWS
  */
 public class ALL_login extends javax.swing.JFrame {
-
+    connection dbConn;
+    public static String sessionEmail;
     /**
      * Creates new form USER_login
      */
@@ -37,6 +41,7 @@ public class ALL_login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         mainpanel = new javax.swing.JPanel();
+        invalid = new javax.swing.JLabel();
         email_lbl1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pass_lbl = new javax.swing.JLabel();
@@ -63,6 +68,10 @@ public class ALL_login extends javax.swing.JFrame {
 
         mainpanel.setBackground(new java.awt.Color(238, 235, 235));
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        invalid.setForeground(new java.awt.Color(158, 31, 31));
+        invalid.setText("Invalid Email or Password.");
+        mainpanel.add(invalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, 20));
 
         email_lbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         email_lbl1.setForeground(new java.awt.Color(72, 96, 51));
@@ -95,6 +104,11 @@ public class ALL_login extends javax.swing.JFrame {
         loginbtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginbtn.setForeground(new java.awt.Color(255, 255, 255));
         loginbtn.setText("Login");
+        loginbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginbtnActionPerformed(evt);
+            }
+        });
         mainpanel.add(loginbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, -1, -1));
 
         getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
@@ -106,6 +120,37 @@ public class ALL_login extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1063, 765));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            String inputEmail = email.getText();
+            String inputPass = pass.getText();
+            
+            // Estmt gets the email, Pstmt gets the password.
+            String Estmt = "SELECT EMAIL FROM ACCOUNTS WHERE EMAIL = ? AND PASSWORD = ?";
+            PreparedStatement Epstmt = dbConn.conn.prepareStatement(Estmt);
+            Epstmt.setString(1, inputEmail);
+            Epstmt.setString(2, inputPass);
+            
+            ResultSet rs = Epstmt.executeQuery();
+            
+            
+            
+            if(rs.next()) {
+                String foundEmail = rs.getString("EMAIL");
+                if (foundEmail.equals(inputEmail)) {
+                    
+                }
+                
+            } else {
+                invalid.setText("Invalid Email or Password.");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ALL_login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_loginbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +205,7 @@ public class ALL_login extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JLabel email_lbl;
     private javax.swing.JLabel email_lbl1;
+    private javax.swing.JLabel invalid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

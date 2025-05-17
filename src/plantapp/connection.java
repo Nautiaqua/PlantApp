@@ -26,7 +26,7 @@ public class connection extends javax.swing.JFrame {
             conn.setAutoCommit(false);
 
             stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT * FROM USERS";  // make sure this table exists
+            String sql = "SELECT EMAIL FROM ACCOUNTS WHERE PASSWORD = password";  // make sure this table exists
             rs = stmt.executeQuery(sql);
             
             System.out.println(rs);
