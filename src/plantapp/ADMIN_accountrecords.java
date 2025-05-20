@@ -253,7 +253,9 @@ public class ADMIN_accountrecords extends javax.swing.JFrame {
     }//GEN-LAST:event_remove_btnActionPerformed
 
     private void close_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_btnActionPerformed
+        ADMIN_dashboard dashboard = new ADMIN_dashboard();
         this.dispose();
+        dashboard.setVisible(true);
 
     }//GEN-LAST:event_close_btnActionPerformed
 

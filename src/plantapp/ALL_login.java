@@ -76,12 +76,13 @@ public class ALL_login extends javax.swing.JFrame {
         dev_button.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dev_button.setForeground(new java.awt.Color(238, 235, 235));
         dev_button.setText("dev quick login");
+        dev_button.setBorder(null);
         dev_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dev_buttonActionPerformed(evt);
             }
         });
-        mainpanel.add(dev_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 710, 150, -1));
+        mainpanel.add(dev_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 150, -1));
 
         invalid.setForeground(new java.awt.Color(158, 31, 31));
         mainpanel.add(invalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, 20));

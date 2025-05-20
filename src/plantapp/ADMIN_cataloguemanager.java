@@ -243,7 +243,9 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
 
+        ADMIN_dashboard dashboard = new ADMIN_dashboard();
         this.dispose();
+        dashboard.setVisible(true);
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void search_catalogueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_catalogueActionPerformed

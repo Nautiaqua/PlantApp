@@ -72,13 +72,16 @@
               <Color blue="eb" green="eb" red="ee" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="dev quick login"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dev_buttonActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="240" y="710" width="150" height="-1"/>
+              <AbsoluteConstraints x="240" y="10" width="150" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
