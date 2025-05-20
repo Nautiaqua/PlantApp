@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 // import javax.swing.table.DefaultTableModel;
 
-public class connection extends javax.swing.JFrame {
+public class connection2 extends javax.swing.JFrame {
     Connection conn;
     Statement stmt;
     ResultSet rs, cloners;
@@ -34,9 +34,24 @@ public class connection extends javax.swing.JFrame {
 
         System.out.println("Connected to SQLite database successfully.");
         }catch (SQLException err) {
-            JOptionPane.showMessageDialog(connection.this, err.getMessage());
+            JOptionPane.showMessageDialog(connection2.this, err.getMessage());
         }
     }
+    
+    public void activateConn() {
+        try {
+            String url = "jdbc:sqlite:database/plantDB.db";
+            conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(false);
+
+            stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            System.out.println("Connected to SQLite database successfully.");
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Database connection error:\n" + err.getMessage());
+        }
+    }
+    
     public void RefreshRS(){
         try{
             stmt.close();
@@ -45,7 +60,16 @@ public class connection extends javax.swing.JFrame {
             String sql = "SELECT * FROM USERS";
             rs = stmt.executeQuery(sql);
         }catch(SQLException ex){
-            Logger.getLogger(connection.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(connection2.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }
+    
+    public void closeConnection() {
+        try {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

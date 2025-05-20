@@ -17,7 +17,7 @@ import java.sql.ResultSet;
  * @author WINDOWS
  */
 public class ALL_login extends javax.swing.JFrame {
-    connection dbConn;
+    connection2 dbConn;
     public static String sessionEmail;
 
     public ALL_login() {
@@ -28,7 +28,7 @@ public class ALL_login extends javax.swing.JFrame {
         System.out.println("Initialized session email: " + sessionEmail);
         
         // Instantiates and connects to the DB.
-        dbConn = new connection();
+        dbConn = new connection2();
         dbConn.ActivateConn();
     }
 
@@ -72,16 +72,16 @@ public class ALL_login extends javax.swing.JFrame {
         mainpanel.setBackground(new java.awt.Color(238, 235, 235));
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dev_button.setBackground(new java.awt.Color(72, 96, 51));
+        dev_button.setBackground(new java.awt.Color(238, 235, 235));
         dev_button.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dev_button.setForeground(new java.awt.Color(255, 255, 255));
+        dev_button.setForeground(new java.awt.Color(238, 235, 235));
         dev_button.setText("dev quick login");
         dev_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dev_buttonActionPerformed(evt);
             }
         });
-        mainpanel.add(dev_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, 150, -1));
+        mainpanel.add(dev_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 710, 150, -1));
 
         invalid.setForeground(new java.awt.Color(158, 31, 31));
         mainpanel.add(invalid, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, 20));

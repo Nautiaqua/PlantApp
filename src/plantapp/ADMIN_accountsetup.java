@@ -23,7 +23,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author WINDOWS
  */
 public class ADMIN_accountsetup extends javax.swing.JFrame {
-    connection dbConn;
+    connection2 dbConn;
     
     public static boolean namecheck = false,
                           emailcheck = false,
@@ -43,8 +43,8 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         typegroup.add(mantype);
         emptype.setSelected(true);
         
-        // db connection thingy
-        dbConn = new connection();
+        // db connection2 thingy
+        dbConn = new connection2();
         dbConn.ActivateConn();
         
         System.out.println("Session email: " + ALL_login.sessionEmail);
