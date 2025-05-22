@@ -238,10 +238,15 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_adaccActionPerformed
 
     private void ctlgmngr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctlgmngr1ActionPerformed
-        // TODO add your handling code here:
-        ADMIN_processorder order = new ADMIN_processorder();
-        this.dispose();
-        order.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            ADMIN_processorder order = new ADMIN_processorder();
+            this.dispose();
+            order.setVisible(true);
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ctlgmngr1ActionPerformed
 
     /**

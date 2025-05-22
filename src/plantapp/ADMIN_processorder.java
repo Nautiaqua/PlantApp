@@ -61,6 +61,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         addtocart = new javax.swing.JButton();
         amountadd = new javax.swing.JSpinner();
         email_lbl1 = new javax.swing.JLabel();
+        btn_close = new javax.swing.JButton();
         mainpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cart = new javax.swing.JTable();
@@ -122,7 +123,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 search_catalogueActionPerformed(evt);
             }
         });
-        mainpanel2.add(search_catalogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 610, 20));
+        mainpanel2.add(search_catalogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 610, 20));
 
         addtocart.setBackground(new java.awt.Color(238, 235, 235));
         addtocart.setForeground(new java.awt.Color(72, 96, 51));
@@ -132,7 +133,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 addtocartActionPerformed(evt);
             }
         });
-        mainpanel2.add(addtocart, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, -1));
+        mainpanel2.add(addtocart, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, 30));
 
         amountadd.setModel(amountModel);
         mainpanel2.add(amountadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
@@ -141,6 +142,16 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         email_lbl1.setForeground(new java.awt.Color(255, 255, 255));
         email_lbl1.setText("Amount:");
         mainpanel2.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+
+        btn_close.setBackground(new java.awt.Color(238, 235, 235));
+        btn_close.setForeground(new java.awt.Color(72, 96, 51));
+        btn_close.setText("Close");
+        btn_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_closeActionPerformed(evt);
+            }
+        });
+        mainpanel2.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 100, 30));
 
         getContentPane().add(mainpanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 650, 760));
 
@@ -169,7 +180,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 finalizeActionPerformed(evt);
             }
         });
-        mainpanel.add(finalize, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
+        mainpanel.add(finalize, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 87, -1, 30));
 
         cartprice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cartprice.setForeground(new java.awt.Color(72, 96, 51));
@@ -185,7 +196,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 clearbtnActionPerformed(evt);
             }
         });
-        mainpanel.add(clearbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+        mainpanel.add(clearbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 87, -1, 30));
 
         removebtn.setBackground(new java.awt.Color(72, 96, 51));
         removebtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -195,7 +206,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 removebtnActionPerformed(evt);
             }
         });
-        mainpanel.add(removebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
+        mainpanel.add(removebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 87, -1, 30));
 
         email_lbl4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl4.setForeground(new java.awt.Color(72, 96, 51));
@@ -207,28 +218,6 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1063, 765));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void search_catalogueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_catalogueActionPerformed
-        String searchQuery = search_catalogue.getText().trim().toLowerCase();
-        DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        table_cm.setRowSorter(sorter);
-
-        if (searchQuery.isEmpty()) {
-            sorter.setRowFilter(null);
-        } else {
-            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
-                @Override
-                public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
-                    String plantName = entry.getStringValue(1).toLowerCase();
-                    String scientificName = entry.getStringValue(3).toLowerCase();
-
-                    return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
-                }
-            };
-            sorter.setRowFilter(filter);
-        }
-    }//GEN-LAST:event_search_catalogueActionPerformed
 
     private void addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartActionPerformed
         // TODO add your handling code here:
@@ -344,10 +333,18 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 pstmt.setString(1, Integer.toString(newSTOCK_QUANTITY));
                 pstmt.setString(2, plantID);
                 
+                String stmt2 = "UPDATE PLANT_SOLD SET AMOUNT_SOLD = ? WHERE CATALOGUE_ID = ?";
+                PreparedStatement pstmt2 = dbConn.conn.prepareStatement(stmt2);
+                pstmt2.setString(1, Integer.toString(amountToSell));
+                pstmt2.setString(2, plantID);
+                
                 pstmt.executeUpdate();
+                pstmt2.executeUpdate();
                 dbConn.conn.commit();
                 System.out.println("Sell done!");
                 System.out.println(" ");
+                
+                
                 refreshData();
                 cartModel.setRowCount(0);
             } catch (SQLException ex) {
@@ -378,6 +375,35 @@ public class ADMIN_processorder extends javax.swing.JFrame {
             amountadd.setValue(selectedStock);
         }
     }//GEN-LAST:event_table_cmMouseClicked
+
+    private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
+
+        ADMIN_dashboard dashboard = new ADMIN_dashboard();
+        this.dispose();
+        dashboard.setVisible(true);
+    }//GEN-LAST:event_btn_closeActionPerformed
+
+    private void search_catalogueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_catalogueActionPerformed
+        String searchQuery = search_catalogue.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        table_cm.setRowSorter(sorter);
+
+        if (searchQuery.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
+                @Override
+                public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                    String plantName = entry.getStringValue(1).toLowerCase();
+                    String scientificName = entry.getStringValue(3).toLowerCase();
+
+                    return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
+                }
+            };
+            sorter.setRowFilter(filter);
+        }
+    }//GEN-LAST:event_search_catalogueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -522,6 +548,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addtocart;
     private javax.swing.JSpinner amountadd;
+    private javax.swing.JButton btn_close;
     private javax.swing.JTable cart;
     private javax.swing.JLabel cartprice;
     private javax.swing.JButton clearbtn;
