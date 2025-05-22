@@ -483,7 +483,6 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         
         table_cm.setModel(PlantModels);
         cart.setModel(cartModel);
-                
     }
     
     public void addData() {
