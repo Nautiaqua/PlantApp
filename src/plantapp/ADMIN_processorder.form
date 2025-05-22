@@ -110,6 +110,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="table_cmMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -143,6 +146,11 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JSpinner" name="amountadd">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="amountModel" type="code"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="450" y="10" width="-1" height="-1"/>
@@ -253,12 +261,12 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="60" red="48" type="rgb"/>
             </Property>
-            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="text" type="java.lang.String" value="Total Price: 0.00"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="280" y="60" width="-1" height="-1"/>
+              <AbsoluteConstraints x="80" y="70" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

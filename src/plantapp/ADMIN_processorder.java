@@ -23,6 +23,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
     connection2 dbConn;
     DefaultTableModel PlantModels = new DefaultTableModel();
     DefaultTableModel cartModel = new DefaultTableModel();
+    SpinnerNumberModel amountModel = new SpinnerNumberModel(1, 1, 100, 1);
 
     /**
      * Creates new form USER_login
@@ -107,6 +108,11 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         mainpanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table_cm.setModel(PlantModels);
+        table_cm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_cmMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table_cm);
 
         mainpanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 610, 650));
@@ -127,6 +133,8 @@ public class ADMIN_processorder extends javax.swing.JFrame {
             }
         });
         mainpanel2.add(addtocart, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, -1));
+
+        amountadd.setModel(amountModel);
         mainpanel2.add(amountadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
 
         email_lbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -165,9 +173,9 @@ public class ADMIN_processorder extends javax.swing.JFrame {
 
         cartprice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cartprice.setForeground(new java.awt.Color(72, 96, 51));
-        cartprice.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        cartprice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cartprice.setText("Total Price: 0.00");
-        mainpanel.add(cartprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
+        mainpanel.add(cartprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         clearbtn.setBackground(new java.awt.Color(72, 96, 51));
         clearbtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -232,6 +240,8 @@ public class ADMIN_processorder extends javax.swing.JFrame {
             String catalogueID = table_cm.getValueAt(selectedRow, 0).toString();
             String plantName = table_cm.getValueAt(selectedRow, 1).toString();
             String price = table_cm.getValueAt(selectedRow, 4).toString();
+            int maxStock = Integer.parseInt(table_cm.getValueAt(selectedRow, 5).toString());
+            System.out.println(maxStock);
 
             int cartcount = cart.getRowCount();
         
@@ -240,13 +250,21 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                     for (int i = 0; i < cartcount; i++) {
                         String currentItemID = cart.getValueAt(i, 0).toString();
                         // Adds an amount if its already in
-                        if (catalogueID.equals(currentItemID)) {
+                        if (catalogueID.equals(currentItemID)) { 
                             inCart = true;
                             int currentAmount = Integer.parseInt(cart.getValueAt(i, 3).toString());
-                            int newAmount = currentAmount + amount;
-                            cartModel.setValueAt(newAmount, i, 3);
-                            cartPriceCalc();
-                            break;
+                            
+                            if (currentAmount >= maxStock) {
+                                cartModel.setValueAt(maxStock, i, 3);
+                                JOptionPane.showMessageDialog(null, "Cannot add more as it would exceed current stock.");
+                                break;
+                                
+                            } else if (currentAmount < maxStock) {
+                                int newAmount = currentAmount + amount;
+                                cartModel.setValueAt(newAmount, i, 3);
+                                cartPriceCalc();
+                                break;
+                            }
                         }
                     }
 
@@ -294,6 +312,16 @@ public class ADMIN_processorder extends javax.swing.JFrame {
 
     private void finalizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizeActionPerformed
         // TODO add your handling code here:
+        int cartcount = cart.getRowCount();
+        
+        for (int i = 0; i < cartcount; i++) {
+            String plantName = table_cm.getValueAt(i, 1).toString();
+            String plantID = table_cm.getValueAt(i, 0).toString();
+            System.out.println(plantName);
+            System.out.println(plantID);
+            
+            
+        }
     }//GEN-LAST:event_finalizeActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
@@ -304,6 +332,18 @@ public class ADMIN_processorder extends javax.swing.JFrame {
             cartprice.setText("Total Price: 0.00");
         }
     }//GEN-LAST:event_clearbtnActionPerformed
+
+    private void table_cmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_cmMouseClicked
+        // TODO add your handling code here:
+        int spinnerValue = (int) amountadd.getValue();
+        int selectedRow = table_cm.getSelectedRow();
+        int selectedStock = Integer.parseInt(table_cm.getValueAt(selectedRow, 5).toString());
+        
+        amountModel.setMaximum(selectedStock);
+        if (spinnerValue > selectedStock) {
+            amountadd.setValue(selectedStock);
+        }
+    }//GEN-LAST:event_table_cmMouseClicked
 
     /**
      * @param args the command line arguments
@@ -383,6 +423,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         
         table_cm.setModel(PlantModels);
         cart.setModel(cartModel);
+                
     }
     
     public void addData() {
@@ -410,7 +451,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         int cartcount = cart.getRowCount();
         double cartPrice = 0;
         if (cartcount != 0) {
-            for (int i = 0; i <= cartcount-1; i++) {
+            for (int i = 0; i < cartcount; i++) {
                 int currentPrice = Integer.parseInt(cart.getValueAt(i, 2).toString());
                 int currentAmount = Integer.parseInt(cart.getValueAt(i, 3).toString());
                 currentPrice = currentPrice * currentAmount;
@@ -418,6 +459,8 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 currentPrice = 0;
             }
             cartprice.setText("Total Price: " + String.format("%.2f", cartPrice));   
+        } else if (cartcount == 0) {
+            cartprice.setText("Total Price: 0.00");
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
