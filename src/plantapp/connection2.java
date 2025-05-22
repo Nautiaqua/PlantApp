@@ -26,13 +26,10 @@ public class connection2 extends javax.swing.JFrame {
             conn.setAutoCommit(false);
 
             stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT * FROM ACCOUNTS";  // make sure this table exists
-            rs = stmt.executeQuery(sql);
-            
-            System.out.println(" ");
-            System.out.println(rs);
+            String sql = "PRAGMA foreign_keys = ON;"; // DO NOT REMOVE THIS, THIS IS NECESSARY FOR FOREIGN KEYS
+            stmt.execute(sql);
 
-        System.out.println("Connected to SQLite database successfully.");
+            System.out.println("Connected to SQLite database successfully.");
         }catch (SQLException err) {
             JOptionPane.showMessageDialog(connection2.this, err.getMessage());
         }
@@ -43,6 +40,11 @@ public class connection2 extends javax.swing.JFrame {
             String url = "jdbc:sqlite:database/plantDB.db";
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(false);
+            
+            stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String sql = "PRAGMA foreign_keys = ON;"; // DO NOT REMOVE THIS, THIS IS NECESSARY FOR FOREIGN KEYS
+            stmt.execute(sql);
+
 
             stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             System.out.println("Connected to SQLite database successfully.");
@@ -57,7 +59,7 @@ public class connection2 extends javax.swing.JFrame {
             stmt.close();
             rs.close();
             stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT * FROM USERS";
+            String sql = "PRAGMA foreign_keys = ON;";
             rs = stmt.executeQuery(sql);
         }catch(SQLException ex){
             Logger.getLogger(connection2.class.getName()).log(Level.SEVERE,null,ex);

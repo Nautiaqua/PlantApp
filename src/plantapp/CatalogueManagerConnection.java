@@ -12,6 +12,10 @@ public class CatalogueManagerConnection {
             String url = "jdbc:sqlite:database/plantDB.db";
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(false);
+            
+            stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String sql = "PRAGMA foreign_keys = ON;"; // DO NOT REMOVE THIS, THIS IS NECESSARY FOR FOREIGN KEYS
+            stmt.execute(sql);
 
             stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             System.out.println("Connected to SQLite database successfully.");

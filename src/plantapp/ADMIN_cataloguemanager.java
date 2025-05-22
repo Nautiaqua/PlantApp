@@ -114,7 +114,7 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
                 search_catalogueActionPerformed(evt);
             }
         });
-        jPanel3.add(search_catalogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 540, 20));
+        jPanel3.add(search_catalogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 620, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,7 +178,7 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         jPanel2.add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 640, 90, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 330, 60));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 330, 60));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 770));
 

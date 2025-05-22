@@ -53,6 +53,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         accrec = new javax.swing.JButton();
         adacc = new javax.swing.JButton();
         email_lbl1 = new javax.swing.JLabel();
+        ctlgmngr1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -91,7 +92,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 loginbtn1ActionPerformed(evt);
             }
         });
-        mainpanel.add(loginbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 300, -1));
+        mainpanel.add(loginbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 300, -1));
 
         ctlgmngr.setBackground(new java.awt.Color(72, 96, 51));
         ctlgmngr.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -102,7 +103,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 ctlgmngrActionPerformed(evt);
             }
         });
-        mainpanel.add(ctlgmngr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 300, -1));
+        mainpanel.add(ctlgmngr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 300, -1));
 
         email_lbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl2.setForeground(new java.awt.Color(72, 96, 51));
@@ -112,7 +113,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         email_lbl3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl3.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl3.setText("Done with work?");
-        mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, -1, -1));
+        mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, -1, -1));
 
         accrec.setBackground(new java.awt.Color(72, 96, 51));
         accrec.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -123,7 +124,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 accrecActionPerformed(evt);
             }
         });
-        mainpanel.add(accrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 300, -1));
+        mainpanel.add(accrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 300, -1));
 
         adacc.setBackground(new java.awt.Color(72, 96, 51));
         adacc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -134,12 +135,23 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 adaccActionPerformed(evt);
             }
         });
-        mainpanel.add(adacc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 300, -1));
+        mainpanel.add(adacc, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 300, -1));
 
         email_lbl1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         email_lbl1.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl1.setText("Portal Dashboard");
         mainpanel.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+
+        ctlgmngr1.setBackground(new java.awt.Color(72, 96, 51));
+        ctlgmngr1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ctlgmngr1.setForeground(new java.awt.Color(255, 255, 255));
+        ctlgmngr1.setText("Process Order");
+        ctlgmngr1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ctlgmngr1ActionPerformed(evt);
+            }
+        });
+        mainpanel.add(ctlgmngr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 300, -1));
 
         getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
@@ -225,6 +237,10 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_adaccActionPerformed
 
+    private void ctlgmngr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctlgmngr1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ctlgmngr1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +294,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
     private javax.swing.JButton accrec;
     private javax.swing.JButton adacc;
     private javax.swing.JButton ctlgmngr;
+    private javax.swing.JButton ctlgmngr1;
     private javax.swing.JLabel email_lbl;
     private javax.swing.JLabel email_lbl1;
     private javax.swing.JLabel email_lbl2;

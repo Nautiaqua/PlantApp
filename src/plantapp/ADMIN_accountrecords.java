@@ -170,10 +170,10 @@ public class ADMIN_accountrecords extends javax.swing.JFrame {
         email_lbl1.setText("Search by last name:");
         jPanel1.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
 
-        email_lbl2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        email_lbl2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         email_lbl2.setForeground(new java.awt.Color(255, 255, 255));
         email_lbl2.setText("Employee Account Records");
-        jPanel1.add(email_lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 290, 20));
+        jPanel1.add(email_lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 360, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-210, 0, 1260, 90));
 
