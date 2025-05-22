@@ -20,6 +20,8 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
     DefaultTableModel soldModel = new DefaultTableModel();
     StringBuilder fastMoving = new StringBuilder("Fast Moving Plants:\n");
     StringBuilder slowMoving = new StringBuilder("Slow Moving Plants:\n");
+    double totalRevenue;
+    int revCount;
     
     public ADMIN_revenuereport() {
         initComponents();
@@ -31,6 +33,8 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
         
         setupTable();
         addData();
+        calcRevenue();
+        updateSR();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,111 +47,142 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         revenue_table = new javax.swing.JTable();
-        result = new javax.swing.JLabel();
         saless = new javax.swing.JLabel();
+        result = new javax.swing.JLabel();
+        btn_close = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        refresh_btn = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel3.setBackground(new java.awt.Color(72, 96, 51));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Revenue Report");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 270, 40));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
         jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(692, 15, 341, 56));
+
+        jPanel1.setBackground(new java.awt.Color(238, 235, 235));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         revenue_table.setModel(soldModel);
         jScrollPane1.setViewportView(revenue_table);
 
-        result.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        result.setText("₱00.00");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 131, 999, 570));
 
         saless.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        saless.setText("TOTAL SALES REVENUE:");
+        saless.setForeground(new java.awt.Color(72, 96, 51));
+        saless.setText("Total Sales Revenue:");
+        jPanel1.add(saless, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saless)
-                        .addGap(18, 18, 18)
-                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 16, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saless)
-                    .addComponent(result))
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
+        result.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        result.setForeground(new java.awt.Color(72, 96, 51));
+        result.setText("₱00.00");
+        jPanel1.add(result, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 260, -1));
 
-        pack();
+        btn_close.setBackground(new java.awt.Color(72, 96, 51));
+        btn_close.setForeground(new java.awt.Color(238, 235, 235));
+        btn_close.setText("Close");
+        btn_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_closeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 90, 80, 30));
+
+        jPanel3.setBackground(new java.awt.Color(72, 96, 51));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Revenue Report");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 270, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 674, 71));
+
+        refresh_btn.setBackground(new java.awt.Color(72, 96, 51));
+        refresh_btn.setForeground(new java.awt.Color(238, 235, 235));
+        refresh_btn.setText("Refresh");
+        refresh_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refresh_btnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(refresh_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 90, -1, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 760));
+
+        setSize(new java.awt.Dimension(1063, 765));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
+
+        ADMIN_dashboard dashboard = new ADMIN_dashboard();
+        this.dispose();
+        dashboard.setVisible(true);
+    }//GEN-LAST:event_btn_closeActionPerformed
+
+    private void refresh_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_btnActionPerformed
+        // TODO add your handling code here:
+        updateSR();
+        refresh();
+    }//GEN-LAST:event_refresh_btnActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ADMIN_revenuereport().setVisible(true);
+        try {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+            */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(ADMIN_revenuereport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        });
+            //</editor-fold>
+            //</editor-fold>
+            //</editor-fold>
+            //</editor-fold>
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+            
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new ADMIN_revenuereport().setVisible(true);
+                }
+            });
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ADMIN_revenuereport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ADMIN_revenuereport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ADMIN_revenuereport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(ADMIN_revenuereport.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void setupTable() {
@@ -158,16 +193,16 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
             }
         };
         
-        String[] columns = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "AMOUNT_SOLD", "SELL_RATE"};
+        String[] columns = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "AMOUNT_SOLD", "TOTAL_STOCK", "SELL_RATE"};
         for (String col : columns) {
             soldModel.addColumn(col);
         }
         revenue_table.setModel(soldModel);
     }
 
-        public void addData() {
+    public void addData() {
         try {
-            String query = "SELECT * FROM PLANT_SOLD";
+            String query = "SELECT PS.CATALOGUE_ID, PS.PLANT_NAME, PS.CATEGORY, PS.SCIENTIFIC_NAME, PS.PRICE, PS.AMOUNT_SOLD, PC.TOTAL_STOCK, PS.SELL_RATE FROM PLANT_SOLD PS JOIN PLANT_CATALOGUE PC ON PS.CATALOGUE_ID = PC.CATALOGUE_ID;";
             PreparedStatement stmt = dbConn.conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             
@@ -185,13 +220,82 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
             Logger.getLogger(ADMIN_processorder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+        
+    public void calcRevenue() {
+        revCount = revenue_table.getRowCount();
+        for (int i = 0; i < revCount; i++) {
+            int currentPrice = Integer.parseInt(revenue_table.getValueAt(i, 4).toString());
+            int currentAmount = Integer.parseInt(revenue_table.getValueAt(i, 5).toString());
+            int currentRevenue = currentPrice * currentAmount;
+            totalRevenue += currentRevenue;
+            
+            System.out.println("Price: " + currentPrice + ", Amount Sold: " + currentAmount);
+            System.out.println(totalRevenue);
+            result.setText("₱" + String.format("%.2f", totalRevenue));
+        }
+    }
     
+    public void refresh() {
+        try {
+            soldModel.setRowCount(0);
+            result.setText("₱00.00");
+            totalRevenue = 0;
+            addData();
+            calcRevenue();
+            JOptionPane.showMessageDialog(null, "Refresh successful.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Failed to refresh.");
+        }
+    }
+    
+    public void updateSR() {
+        revCount = revenue_table.getRowCount();
+        for (int i = 0; i < revCount; i++) {
+            String currentID = revenue_table.getValueAt(i, 0).toString();
+            int currentAmount = Integer.parseInt(revenue_table.getValueAt(i, 5).toString());
+            int totalStock = Integer.parseInt(revenue_table.getValueAt(i, 6).toString());
+            double breakpoint = 0.7 * totalStock; // gets 70% of the total stock.
+            
+            if (currentAmount >= breakpoint) {
+                System.out.println(currentID + " is FAST");
+                try {
+                String stmt = "UPDATE PLANT_SOLD SET SELL_RATE = 'FAST' WHERE CATALOGUE_ID = ?";
+                PreparedStatement pstmt = dbConn.conn.prepareStatement(stmt);
+                pstmt.setString(1, currentID);
+                
+                pstmt.executeUpdate();
+                dbConn.conn.commit();
+                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "An error occured with the update process!");
+                }
+            } else if (currentAmount < breakpoint) {
+                System.out.println(currentID + " is SLOW");
+                try {
+                    String stmt = "UPDATE PLANT_SOLD SET SELL_RATE = 'SLOW' WHERE CATALOGUE_ID = ?";
+                    PreparedStatement pstmt = dbConn.conn.prepareStatement(stmt);
+                    pstmt.setString(1, currentID);
+
+                    pstmt.executeUpdate();
+                    dbConn.conn.commit();
+                } catch (Exception e) {
+                     e.printStackTrace();
+                     JOptionPane.showMessageDialog(null, "An error occured with the update process!");
+                }
+            }
+                
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_close;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refresh_btn;
     private javax.swing.JLabel result;
     private javax.swing.JTable revenue_table;
     private javax.swing.JLabel saless;

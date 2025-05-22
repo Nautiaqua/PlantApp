@@ -163,6 +163,11 @@ public class ADMIN_accountrecords extends javax.swing.JFrame {
                 search_recordsActionPerformed(evt);
             }
         });
+        search_records.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_recordsKeyReleased(evt);
+            }
+        });
         jPanel1.add(search_records, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 660, 20));
 
         email_lbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -258,6 +263,30 @@ public class ADMIN_accountrecords extends javax.swing.JFrame {
         dashboard.setVisible(true);
 
     }//GEN-LAST:event_close_btnActionPerformed
+
+    private void search_recordsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_recordsKeyReleased
+        // TODO add your handling code here:
+        String searchQuery = search_records.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) tbl_records.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbl_records.setRowSorter(sorter);
+
+        if (searchQuery.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+
+            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
+                @Override
+                public boolean include(RowFilter.Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                    String firstname = entry.getStringValue(2).toLowerCase();
+                    String lastname = entry.getStringValue(3).toLowerCase();
+
+                    return firstname.contains(searchQuery) || lastname.contains(searchQuery);
+                }
+            };
+            sorter.setRowFilter(filter);
+        }
+    }//GEN-LAST:event_search_recordsKeyReleased
 
     private void Select() {
         String[] columnNames = {"Email Account", "First Name", "Last Name", "Birth Date", "Address", "Contact #", "Account Type"};

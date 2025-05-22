@@ -129,6 +129,11 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
                 search_catalogueActionPerformed(evt);
             }
         });
+        search_catalogue.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_catalogueKeyReleased(evt);
+            }
+        });
         jPanel3.add(search_catalogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 620, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -396,6 +401,29 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_add_stockActionPerformed
+
+    private void search_catalogueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_catalogueKeyReleased
+        // TODO add your handling code here:
+        String searchQuery = search_catalogue.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        table_cm.setRowSorter(sorter);
+
+        if (searchQuery.isEmpty()) {
+            sorter.setRowFilter(null); 
+        } else {
+            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
+                @Override
+                public boolean include(RowFilter.Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                    String plantName = entry.getStringValue(1).toLowerCase(); 
+                    String scientificName = entry.getStringValue(3).toLowerCase();
+
+                    return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
+                }
+            };
+            sorter.setRowFilter(filter);
+        }
+    }//GEN-LAST:event_search_catalogueKeyReleased
 
     private void Select() {
         String[] columnNames = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"};

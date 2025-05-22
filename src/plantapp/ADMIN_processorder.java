@@ -61,7 +61,6 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         addtocart = new javax.swing.JButton();
         amountadd = new javax.swing.JSpinner();
         email_lbl1 = new javax.swing.JLabel();
-        btn_close = new javax.swing.JButton();
         mainpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cart = new javax.swing.JTable();
@@ -71,6 +70,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         clearbtn = new javax.swing.JButton();
         removebtn = new javax.swing.JButton();
         email_lbl4 = new javax.swing.JLabel();
+        btn_close = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,11 +116,16 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(table_cm);
 
-        mainpanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 610, 650));
+        mainpanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 610, 640));
 
         search_catalogue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_catalogueActionPerformed(evt);
+            }
+        });
+        search_catalogue.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_catalogueKeyReleased(evt);
             }
         });
         mainpanel2.add(search_catalogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 610, 20));
@@ -142,16 +147,6 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         email_lbl1.setForeground(new java.awt.Color(255, 255, 255));
         email_lbl1.setText("Amount:");
         mainpanel2.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
-
-        btn_close.setBackground(new java.awt.Color(238, 235, 235));
-        btn_close.setForeground(new java.awt.Color(72, 96, 51));
-        btn_close.setText("Close");
-        btn_close.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_closeActionPerformed(evt);
-            }
-        });
-        mainpanel2.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 100, 30));
 
         getContentPane().add(mainpanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 650, 760));
 
@@ -186,7 +181,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         cartprice.setForeground(new java.awt.Color(72, 96, 51));
         cartprice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cartprice.setText("Total Price: 0.00");
-        mainpanel.add(cartprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        mainpanel.add(cartprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
         clearbtn.setBackground(new java.awt.Color(72, 96, 51));
         clearbtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -212,6 +207,16 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         email_lbl4.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl4.setText("Cart");
         mainpanel.add(email_lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        btn_close.setBackground(new java.awt.Color(72, 96, 51));
+        btn_close.setForeground(new java.awt.Color(238, 235, 235));
+        btn_close.setText("Close");
+        btn_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_closeActionPerformed(evt);
+            }
+        });
+        mainpanel.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 80, 30));
 
         getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
@@ -404,6 +409,29 @@ public class ADMIN_processorder extends javax.swing.JFrame {
             sorter.setRowFilter(filter);
         }
     }//GEN-LAST:event_search_catalogueActionPerformed
+
+    private void search_catalogueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_catalogueKeyReleased
+        // TODO add your handling code here:
+        String searchQuery = search_catalogue.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        table_cm.setRowSorter(sorter);
+
+        if (searchQuery.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
+                @Override
+                public boolean include(RowFilter.Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                    String plantName = entry.getStringValue(1).toLowerCase();
+                    String scientificName = entry.getStringValue(3).toLowerCase();
+
+                    return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
+                }
+            };
+            sorter.setRowFilter(filter);
+        }
+    }//GEN-LAST:event_search_catalogueKeyReleased
 
     /**
      * @param args the command line arguments
