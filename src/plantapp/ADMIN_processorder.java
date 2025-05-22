@@ -313,12 +313,46 @@ public class ADMIN_processorder extends javax.swing.JFrame {
     private void finalizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizeActionPerformed
         // TODO add your handling code here:
         int cartcount = cart.getRowCount();
+        int catacount = table_cm.getRowCount();
         
         for (int i = 0; i < cartcount; i++) {
-            String plantName = table_cm.getValueAt(i, 1).toString();
-            String plantID = table_cm.getValueAt(i, 0).toString();
-            System.out.println(plantName);
-            System.out.println(plantID);
+            try {
+                
+                
+                
+                String plantName = cart.getValueAt(i, 1).toString();
+                String plantID = cart.getValueAt(i, 0).toString();
+                int amountToSell = Integer.parseInt(cart.getValueAt(i, 3).toString());
+                int stockQuantity = 0;
+                
+                for (int j = 0; j < catacount; j++) {
+                    String currentID = table_cm.getValueAt(j, 0).toString();
+                    if (plantID.equals(currentID)) {
+                        stockQuantity = Integer.parseInt(table_cm.getValueAt(j, 5).toString());
+                        break;
+                    }
+                }
+                
+                
+                System.out.println("Selling: " + plantName + " " + plantID + " with the amount of " + amountToSell);
+                
+                int newSTOCK_QUANTITY = stockQuantity - amountToSell;
+                
+                
+                String stmt = "UPDATE PLANT_CATALOGUE SET STOCK_QUANTITY = ? WHERE CATALOGUE_ID = ?";
+                PreparedStatement pstmt = dbConn.conn.prepareStatement(stmt);
+                pstmt.setString(1, Integer.toString(newSTOCK_QUANTITY));
+                pstmt.setString(2, plantID);
+                
+                pstmt.executeUpdate();
+                dbConn.conn.commit();
+                System.out.println("Sell done!");
+                System.out.println(" ");
+                refreshData();
+                cartModel.setRowCount(0);
+            } catch (SQLException ex) {
+                Logger.getLogger(ADMIN_processorder.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             
         }
@@ -403,7 +437,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
             }
         };
         
-        String[] columns = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK"};
+        String[] columns = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK", "TOTAL_STOCK"};
         for (String col : columns) {
             PlantModels.addColumn(col);
         }
@@ -428,6 +462,28 @@ public class ADMIN_processorder extends javax.swing.JFrame {
     
     public void addData() {
         try {
+            String query = "SELECT * FROM PLANT_CATALOGUE";
+            PreparedStatement stmt = dbConn.conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            
+            int columnCount = rs.getMetaData().getColumnCount();
+            
+            while (rs.next()) {
+                Object[] rowData = new Object[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    rowData[i] = rs.getObject(i + 1);
+            }
+            PlantModels.addRow(rowData);
+        }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_processorder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void refreshData() {
+        try {
+            PlantModels.setRowCount(0);
             String query = "SELECT * FROM PLANT_CATALOGUE";
             PreparedStatement stmt = dbConn.conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
