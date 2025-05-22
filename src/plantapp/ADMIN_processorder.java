@@ -37,6 +37,7 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         
         setupTable();
         addData();
+        
     }
 
     /**
@@ -50,6 +51,8 @@ public class ADMIN_processorder extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jSlider1 = new javax.swing.JSlider();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         mainpanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_cm = new javax.swing.JTable();
@@ -62,8 +65,10 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         cart = new javax.swing.JTable();
         email_lbl2 = new javax.swing.JLabel();
         finalize = new javax.swing.JButton();
-        email_lbl3 = new javax.swing.JLabel();
+        cartprice = new javax.swing.JLabel();
+        clearbtn = new javax.swing.JButton();
         removebtn = new javax.swing.JButton();
+        email_lbl4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,17 +81,35 @@ public class ADMIN_processorder extends javax.swing.JFrame {
             .addGap(0, 260, Short.MAX_VALUE)
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mainpanel2.setBackground(new java.awt.Color(72, 96, 51));
+        mainpanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainpanel2MouseClicked(evt);
+            }
+        });
         mainpanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table_cm.setModel(PlantModels);
         jScrollPane2.setViewportView(table_cm);
 
-        mainpanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 610, 650));
+        mainpanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 610, 650));
 
         search_catalogue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +137,11 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         getContentPane().add(mainpanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 650, 760));
 
         mainpanel.setBackground(new java.awt.Color(238, 235, 235));
+        mainpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainpanelMouseClicked(evt);
+            }
+        });
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setViewportView(cart);
@@ -128,17 +156,43 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         finalize.setBackground(new java.awt.Color(72, 96, 51));
         finalize.setForeground(new java.awt.Color(255, 255, 255));
         finalize.setText("Finalize Transaction");
+        finalize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizeActionPerformed(evt);
+            }
+        });
         mainpanel.add(finalize, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
 
-        email_lbl3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        email_lbl3.setForeground(new java.awt.Color(72, 96, 51));
-        email_lbl3.setText("Cart");
-        mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        cartprice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cartprice.setForeground(new java.awt.Color(72, 96, 51));
+        cartprice.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        cartprice.setText("Total Price: 0.00");
+        mainpanel.add(cartprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
+
+        clearbtn.setBackground(new java.awt.Color(72, 96, 51));
+        clearbtn.setForeground(new java.awt.Color(255, 255, 255));
+        clearbtn.setText("Clear");
+        clearbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearbtnActionPerformed(evt);
+            }
+        });
+        mainpanel.add(clearbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
         removebtn.setBackground(new java.awt.Color(72, 96, 51));
         removebtn.setForeground(new java.awt.Color(255, 255, 255));
         removebtn.setText("Remove");
+        removebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removebtnActionPerformed(evt);
+            }
+        });
         mainpanel.add(removebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
+
+        email_lbl4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_lbl4.setForeground(new java.awt.Color(72, 96, 51));
+        email_lbl4.setText("Cart");
+        mainpanel.add(email_lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
@@ -170,42 +224,86 @@ public class ADMIN_processorder extends javax.swing.JFrame {
 
     private void addtocartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartActionPerformed
         // TODO add your handling code here:
-        int selectedRow = table_cm.getSelectedRow();
-        int amount = (int) amountadd.getValue(); 
-        boolean inCart = false;
-        
-        String catalogueID = table_cm.getValueAt(selectedRow, 0).toString();
-        String plantName = table_cm.getValueAt(selectedRow, 1).toString();
-        String price = table_cm.getValueAt(selectedRow, 4).toString();
-        
-        int cartcount = cart.getRowCount();
-        if (amount != 0) {
-            if (cartcount != 0) {
-                for (int i = 0; i < cartcount; i++) {
-                    String currentItemID = cart.getValueAt(i, 0).toString();
-                    // Adds an amount if its already in
-                    if (catalogueID.equals(currentItemID)) {
-                        inCart = true;
-                        int currentAmount = Integer.parseInt(cart.getValueAt(i, 3).toString());
-                        int newAmount = currentAmount + amount;
-                        cartModel.setValueAt(newAmount, i, 3);
-                        break;
-                    }
-                }
+        try {
+            int selectedRow = table_cm.getSelectedRow();
+            int amount = (int) amountadd.getValue(); 
+            boolean inCart = false;
 
-                if (inCart == false) {
+            String catalogueID = table_cm.getValueAt(selectedRow, 0).toString();
+            String plantName = table_cm.getValueAt(selectedRow, 1).toString();
+            String price = table_cm.getValueAt(selectedRow, 4).toString();
+
+            int cartcount = cart.getRowCount();
+        
+            if (amount != 0) {
+                if (cartcount != 0) {
+                    for (int i = 0; i < cartcount; i++) {
+                        String currentItemID = cart.getValueAt(i, 0).toString();
+                        // Adds an amount if its already in
+                        if (catalogueID.equals(currentItemID)) {
+                            inCart = true;
+                            int currentAmount = Integer.parseInt(cart.getValueAt(i, 3).toString());
+                            int newAmount = currentAmount + amount;
+                            cartModel.setValueAt(newAmount, i, 3);
+                            cartPriceCalc();
+                            break;
+                        }
+                    }
+
+                    if (inCart == false) {
+                        Object[] newItem = {catalogueID, plantName, price, amount};
+                        cartModel.addRow(newItem);
+                        cartPriceCalc();
+                    }
+                } else if (cartcount == 0) {
                     Object[] newItem = {catalogueID, plantName, price, amount};
                     cartModel.addRow(newItem);
+                    cartPriceCalc();
                 }
-            } else if (cartcount == 0) {
-                Object[] newItem = {catalogueID, plantName, price, amount};
-                cartModel.addRow(newItem);
+            } else if (amount == 0) {
+                JOptionPane.showMessageDialog(null, "Please select an amount");
             }
-        } else if (amount == 0) {
-            JOptionPane.showMessageDialog(null, "Please select an amount");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please select a plant to add");
         }
         
     }//GEN-LAST:event_addtocartActionPerformed
+
+    private void removebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removebtnActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = (int) cart.getSelectedRow();
+        try {
+            cartModel.removeRow(selectedIndex);
+            cartPriceCalc();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Please select a row to delete");
+        }
+    }//GEN-LAST:event_removebtnActionPerformed
+
+    private void mainpanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainpanel2MouseClicked
+        // TODO add your handling code here:
+        table_cm.clearSelection();
+        cart.clearSelection();
+    }//GEN-LAST:event_mainpanel2MouseClicked
+
+    private void mainpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainpanelMouseClicked
+        // TODO add your handling code here:
+        table_cm.clearSelection();
+        cart.clearSelection();
+    }//GEN-LAST:event_mainpanelMouseClicked
+
+    private void finalizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_finalizeActionPerformed
+
+    private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
+        // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear the cart?");
+        if (result == JOptionPane.YES_OPTION) {
+            cartModel.setRowCount(0);
+            cartprice.setText("Total Price: 0.00");
+        }
+    }//GEN-LAST:event_clearbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,18 +406,36 @@ public class ADMIN_processorder extends javax.swing.JFrame {
         }
     }
     
+    public void cartPriceCalc() {
+        int cartcount = cart.getRowCount();
+        double cartPrice = 0;
+        if (cartcount != 0) {
+            for (int i = 0; i <= cartcount-1; i++) {
+                int currentPrice = Integer.parseInt(cart.getValueAt(i, 2).toString());
+                int currentAmount = Integer.parseInt(cart.getValueAt(i, 3).toString());
+                currentPrice = currentPrice * currentAmount;
+                cartPrice += currentPrice;
+                currentPrice = 0;
+            }
+            cartprice.setText("Total Price: " + String.format("%.2f", cartPrice));   
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addtocart;
     private javax.swing.JSpinner amountadd;
     private javax.swing.JTable cart;
+    private javax.swing.JLabel cartprice;
+    private javax.swing.JButton clearbtn;
     private javax.swing.JLabel email_lbl1;
     private javax.swing.JLabel email_lbl2;
-    private javax.swing.JLabel email_lbl3;
+    private javax.swing.JLabel email_lbl4;
     private javax.swing.JButton finalize;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSlider jSlider1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel mainpanel;
     private javax.swing.JPanel mainpanel2;
     private javax.swing.JButton removebtn;
