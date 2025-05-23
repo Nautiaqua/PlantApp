@@ -17,45 +17,52 @@ import java.time.Instant;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+public class ADMIN_cataloguemanager extends connection2 {
 
-public class ADMIN_cataloguemanager extends javax.swing.JFrame {
     connection2 dbConn;
     Statement stmt;
+    boolean alreadySaving = false;
 
-    private final CatalogueManagerConnection db = new CatalogueManagerConnection();    
+    private final CatalogueManagerConnection db = new CatalogueManagerConnection();
     DefaultTableModel PlantModels = new DefaultTableModel() {
-    @Override
-    public boolean isCellEditable(int row, int column) {
-        return true; // Allow editing all cells
-    }
-};
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return true; // Allow editing all cells
+        }
+    };
+    DefaultTableModel PlantModels2 = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return true; // Allow editing all cells
+        }
+    };
 
-    
 
     public ADMIN_cataloguemanager() {
         initComponents();
-        
+
         dbConn = new connection2();
         dbConn.ActivateConn();
-        
+
         System.out.println("Session email: " + ALL_login.sessionEmail);
-        
-        table_cm.setModel(PlantModels);
+
+        table_cm.setModel(PlantModels); 
+        table_cm1.setModel(PlantModels2);
         Select();
-        
+
         btn_save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btn_saveActionPerformed(evt);
             }
         });
-        
-        
-        
+
     }
 
     private void setTableDesign() {
@@ -90,13 +97,8 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         worker.execute();
     }
 
-   
-
-        // Optional: commit if your DB requires it
-        // db.conn.commit();
-
-
-        
+    // Optional: commit if your DB requires it
+    // dbConn.conn.commit();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,6 +118,11 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         add_stock = new javax.swing.JButton();
         stockadd = new javax.swing.JSpinner();
         email_lbl4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table_cm1 = new javax.swing.JTable();
+        btn_add1 = new javax.swing.JButton();
+        fnamelbl = new javax.swing.JLabel();
+        btn_add2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -154,18 +161,18 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         table_cm.setModel(PlantModels);
         jScrollPane1.setViewportView(table_cm);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 128, 990, 510));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 128, 990, 350));
 
         btn_add.setBackground(new java.awt.Color(72, 96, 51));
         btn_add.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_add.setForeground(new java.awt.Color(255, 255, 255));
-        btn_add.setText("Add");
+        btn_add.setText("Add New");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 650, 80, -1));
+        jPanel2.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 610, 90, -1));
 
         btn_delete.setBackground(new java.awt.Color(72, 96, 51));
         btn_delete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -176,7 +183,7 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
                 btn_deleteActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 650, 80, -1));
+        jPanel2.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 610, 80, -1));
 
         btn_close.setBackground(new java.awt.Color(72, 96, 51));
         btn_close.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -187,18 +194,18 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
                 btn_closeActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, 110, -1));
+        jPanel2.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 110, -1));
 
         btn_save.setBackground(new java.awt.Color(72, 96, 51));
         btn_save.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_save.setForeground(new java.awt.Color(255, 255, 255));
-        btn_save.setText("Save");
+        btn_save.setText("Update");
         btn_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_saveActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 650, 90, -1));
+        jPanel2.add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 610, 80, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 330, 60));
@@ -212,70 +219,103 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
                 add_stockActionPerformed(evt);
             }
         });
-        jPanel2.add(add_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 650, 100, -1));
+        jPanel2.add(add_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, 100, -1));
 
         stockadd.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        jPanel2.add(stockadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 650, 90, -1));
+        jPanel2.add(stockadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 610, 90, -1));
 
         email_lbl4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl4.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl4.setText("Amount of stock to add:");
-        jPanel2.add(email_lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 650, -1, -1));
+        jPanel2.add(email_lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 610, -1, -1));
+
+        table_cm1.setModel(PlantModels2);
+        jScrollPane2.setViewportView(table_cm1);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 990, 90));
+
+        btn_add1.setBackground(new java.awt.Color(72, 96, 51));
+        btn_add1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_add1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add1.setText("Save New");
+        btn_add1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_add1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 610, 100, -1));
+
+        fnamelbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        fnamelbl.setForeground(new java.awt.Color(72, 96, 51));
+        fnamelbl.setText("New:");
+        jPanel2.add(fnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, 20));
+
+        btn_add2.setBackground(new java.awt.Color(72, 96, 51));
+        btn_add2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_add2.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add2.setText("Clear New");
+        btn_add2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_add2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 610, 100, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 770));
 
-        setSize(new java.awt.Dimension(1063, 769));
+        setSize(new java.awt.Dimension(1063, 766));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-    int selectedRow = table_cm.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a catalogue entry to delete.");
-        return;
-    }
-
-    DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
-    String catalogueId = model.getValueAt(selectedRow, 0).toString().trim(); // Ensure it's trimmed
-
-    int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Permanently delete plant with Catalogue ID: " + catalogueId + "?",
-            "Confirm Deletion",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-    );
-
-    if (confirm != JOptionPane.YES_OPTION) {
-        return;
-    }
-
-    try {
-        String deleteSQL = "DELETE FROM PLANT_CATALOGUE WHERE CATALOGUE_ID = ?";
-        try (PreparedStatement pstmt = db.conn.prepareStatement(deleteSQL)) {
-            pstmt.setString(1, catalogueId);
-            int rowsDeleted = pstmt.executeUpdate();
-
-            if (rowsDeleted > 0) {
-                // Force commit to ensure deletion is written to DB
-                db.conn.commit();
-                JOptionPane.showMessageDialog(this, "Plant entry deleted successfully.");
-            } else {
-                JOptionPane.showMessageDialog(this, "No plant entry found with Catalogue ID: " + catalogueId);
-            }
+        int selectedRow = table_cm.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a catalogue entry to delete.");
+            return;
         }
-    } catch (SQLException ex) {
+
+        DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
+        String catalogueId = model.getValueAt(selectedRow, 0).toString().trim(); // Ensure it's trimmed
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Permanently delete plant with Catalogue ID: " + catalogueId + "?",
+                "Confirm Deletion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
         try {
-            if (db.conn != null) {
-                db.conn.rollback(); // rollback if something goes wrong
+            String deleteSQL = "DELETE FROM PLANT_CATALOGUE WHERE CATALOGUE_ID = ?";
+            try (PreparedStatement pstmt = dbConn.conn.prepareStatement(deleteSQL)) {
+                pstmt.setString(1, catalogueId);
+                int rowsDeleted = pstmt.executeUpdate();
+
+                if (rowsDeleted > 0) {
+                    // Force commit to ensure deletion is written to DB
+                    dbConn.conn.commit();
+                    JOptionPane.showMessageDialog(this, "Plant entry deleted successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "No plant entry found with Catalogue ID: " + catalogueId);
+                }
             }
-        } catch (SQLException rollbackEx) {
-            rollbackEx.printStackTrace();
+        } catch (SQLException ex) {
+            try {
+                if (dbConn.conn != null) {
+                    dbConn.conn.rollback(); // rollback if something goes wrong
+                }
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "Error deleting plant entry:\n" + ex.getMessage());
+            ex.printStackTrace();
+            Select();
         }
-        JOptionPane.showMessageDialog(this, "Error deleting plant entry:\n" + ex.getMessage());
-        ex.printStackTrace();
-    Select(); 
-        }
+        Select();
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
@@ -291,75 +331,43 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void search_catalogueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_catalogueActionPerformed
-    String searchQuery = search_catalogue.getText().trim().toLowerCase();
-    DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    table_cm.setRowSorter(sorter);
+        String searchQuery = search_catalogue.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) table_cm.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        table_cm.setRowSorter(sorter);
 
-    if (searchQuery.isEmpty()) {
-        sorter.setRowFilter(null); 
-    } else {
-        RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
-            @Override
-            public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
-                String plantName = entry.getStringValue(1).toLowerCase(); 
-                String scientificName = entry.getStringValue(3).toLowerCase();
-                
-                return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
-            }
-        };
-        sorter.setRowFilter(filter);
-    }
+        if (searchQuery.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
+                @Override
+                public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                    String plantName = entry.getStringValue(1).toLowerCase();
+                    String scientificName = entry.getStringValue(3).toLowerCase();
+
+                    return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
+                }
+            };
+            sorter.setRowFilter(filter);
+        }
     }//GEN-LAST:event_search_catalogueActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        PlantModels.addRow(new Object[]{"", "", "", "", 0, 0, 0});
-        int newRowIndex = PlantModels.getRowCount() - 1;
-        table_cm.changeSelection(newRowIndex, 0, false, false);
-    
+        PlantModels2.addRow(new Object[]{"", "", "", "", 0, 0, 0});
+        int newRowIndex = PlantModels2.getRowCount() - 1;
+        table_cm1.changeSelection(newRowIndex, 0, false, false);
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-    int selectedRow = table_cm.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a row to save.");
-        return;
-    }
-
-    try {
-        String cid = table_cm.getValueAt(selectedRow, 0).toString();
-        String pn = table_cm.getValueAt(selectedRow, 1).toString();
-        String c = table_cm.getValueAt(selectedRow, 2).toString();
-        String sn = table_cm.getValueAt(selectedRow, 3).toString();
-
-        int p = Integer.parseInt(table_cm.getValueAt(selectedRow, 4).toString());
-        int sq = Integer.parseInt(table_cm.getValueAt(selectedRow, 5).toString());
-        int ts = Integer.parseInt(table_cm.getValueAt(selectedRow, 6).toString());
-
-        // Optional: turn off auto-commit (if not already)
-        db.conn.setAutoCommit(false);
-
-        String sql = "INSERT INTO PLANT_CATALOGUE (CATALOGUE_ID, PLANT_NAME, CATEGORY, SCIENTIFIC_NAME, PRICE, STOCK_QUANTITY, TOTAL_STOCK) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = db.conn.prepareStatement(sql);
-
-        pstmt.setString(1, cid);
-        pstmt.setString(2, pn);
-        pstmt.setString(3, c);
-        pstmt.setString(4, sn);
-        pstmt.setInt(5, p);
-        pstmt.setInt(6, sq);
-        pstmt.setInt(7, ts);
-
-        int rowsInserted = pstmt.executeUpdate();
-        JOptionPane.showMessageDialog(this, "Record saved successfully.");
-        Select();  // Refresh the table
-
-    } catch (NumberFormatException nfe) {
-        JOptionPane.showMessageDialog(this, "Price and Stock Quantity must be valid numbers.");
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error saving record:\n" + ex.getMessage());
-    }
+        if (alreadySaving == false) {
+            alreadySaving = true;
+            try {
+                save();
+            } finally {
+                alreadySaving = false;
+            }
+        }
+        Select();
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void add_stockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_stockActionPerformed
@@ -390,8 +398,8 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row");
         }
-            
-        
+
+
     }//GEN-LAST:event_add_stockActionPerformed
 
     private void search_catalogueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_catalogueKeyReleased
@@ -402,12 +410,12 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         table_cm.setRowSorter(sorter);
 
         if (searchQuery.isEmpty()) {
-            sorter.setRowFilter(null); 
+            sorter.setRowFilter(null);
         } else {
             RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
                 @Override
                 public boolean include(RowFilter.Entry<? extends DefaultTableModel, ? extends Object> entry) {
-                    String plantName = entry.getStringValue(1).toLowerCase(); 
+                    String plantName = entry.getStringValue(1).toLowerCase();
                     String scientificName = entry.getStringValue(3).toLowerCase();
 
                     return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
@@ -417,10 +425,76 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_search_catalogueKeyReleased
 
+    private void btn_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add1ActionPerformed
+        boolean existID = false;
+        try {
+            // TODO add your handling code here:
+            int selectedRow = table_cm1.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Please select a row to save.");
+                return;
+            }
+            dbConn.conn.setAutoCommit(false);
+            String cid1 = table_cm1.getValueAt(selectedRow, 0).toString();
+            System.out.println(cid1);
+            String pn1 = table_cm1.getValueAt(selectedRow, 1).toString();
+            String c1 = table_cm1.getValueAt(selectedRow, 2).toString();
+            String sn1 = table_cm1.getValueAt(selectedRow, 3).toString();
+
+            int p1 = Integer.parseInt(table_cm1.getValueAt(selectedRow, 4).toString());
+            int sq1 = Integer.parseInt(table_cm1.getValueAt(selectedRow, 5).toString());
+            int ts1 = Integer.parseInt(table_cm1.getValueAt(selectedRow, 6).toString());
+            
+            int catacount = table_cm.getRowCount();
+            for (int i = 0; i < catacount; i++){
+                String currentID = table_cm.getValueAt(i, 0).toString();
+                if (cid1.equals(currentID)) {
+                    existID = true;
+                    JOptionPane.showMessageDialog(null, "Plant ID already exists.");
+                    break;
+                }
+            }
+            
+            if (existID == false) {
+                System.out.println("RUNNING THE INSERT STATEMENT");
+                String sql = "INSERT INTO PLANT_CATALOGUE (CATALOGUE_ID, PLANT_NAME, CATEGORY, SCIENTIFIC_NAME, PRICE, STOCK_QUANTITY, TOTAL_STOCK) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = dbConn.conn.prepareStatement(sql);
+
+                pstmt.setString(1, cid1);
+                pstmt.setString(2, pn1);
+                pstmt.setString(3, c1);
+                pstmt.setString(4, sn1);
+                pstmt.setInt(5, p1);
+                pstmt.setInt(6, sq1);
+                pstmt.setInt(7, ts1);
+
+
+                int updatedRows = pstmt.executeUpdate();
+                dbConn.conn.commit();
+                System.out.println("Rows updated: " + updatedRows);
+                JOptionPane.showMessageDialog(this, "New record saved successfully.");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_cataloguemanager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Select();
+    }//GEN-LAST:event_btn_add1ActionPerformed
+
+    private void btn_add2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add2ActionPerformed
+        // TODO add your handling code here:
+       PlantModels2.setRowCount(0);
+       Select();
+    }//GEN-LAST:event_btn_add2ActionPerformed
+
     private void Select() {
         String[] columnNames = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"};
         PlantModels.setColumnIdentifiers(columnNames);
         PlantModels.setRowCount(0);
+        
+        PlantModels2.setColumnIdentifiers(new String[]{
+    "CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"
+});
 
         try {
             Statement stmt = dbConn.conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
@@ -432,22 +506,21 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
                 String c = rs.getString("CATEGORY");
                 String sn = rs.getString("SCIENTIFIC_NAME");
                 int p = rs.getInt("PRICE");
-                int sq = rs.getInt("STOCK_QUANTITY"); 
+                int sq = rs.getInt("STOCK_QUANTITY");
                 int ts = rs.getInt("TOTAL_STOCK");
-                
+
                 table_cm.setVisible(true);
                 PlantModels.addRow(new Object[]{cid, pn, c, sn, p, sq, ts});
             }
-
+            
             setTableDesign();
 
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(ADMIN_cataloguemanager.this, "Error loading account records:\n" + err.getMessage());
         }
-        
-        
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -458,7 +531,7 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
             /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-            */
+             */
             try {
                 for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                     if ("Nimbus".equals(info.getName())) {
@@ -477,7 +550,7 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
             }
             //</editor-fold>
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
-            
+
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -494,22 +567,90 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
             Logger.getLogger(ADMIN_cataloguemanager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void save() {
+               boolean idExists = false;
+               boolean idNotExists = false;
+        try {
+            int selectedRow = table_cm.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Please select a row to save.");
+                return;
+            }
+            dbConn.conn.setAutoCommit(false);
+            String cid = table_cm.getValueAt(selectedRow, 0).toString();
+            System.out.println(cid);
+            String pn = table_cm.getValueAt(selectedRow, 1).toString();
+            String c = table_cm.getValueAt(selectedRow, 2).toString();
+            String sn = table_cm.getValueAt(selectedRow, 3).toString();
 
+            int p = Integer.parseInt(table_cm.getValueAt(selectedRow, 4).toString());
+            int sq = Integer.parseInt(table_cm.getValueAt(selectedRow, 5).toString());
+            int ts = Integer.parseInt(table_cm.getValueAt(selectedRow, 6).toString());
+            
+            
+            
+            
+            Statement stmt = dbConn.conn.createStatement();
+            ResultSet rs3 = stmt.executeQuery("SELECT CATALOGUE_ID FROM PLANT_CATALOGUE");
+            while (rs3.next()) {
+                String existingId = rs3.getString("CATALOGUE_ID");
+                if (existingId.equals(cid)) {
+                    idExists = true;
+                    break;
+                }
+            }   
+            
+            if (idExists == true) {
+                System.out.println("RUNNING THE UPDATE STATEMENT");
+                String sql = "UPDATE PLANT_CATALOGUE SET PLANT_NAME = ?, CATEGORY = ?, SCIENTIFIC_NAME = ?, PRICE = ?, STOCK_QUANTITY = ?, TOTAL_STOCK = ? WHERE CATALOGUE_ID = ?";
+                    PreparedStatement pstmt = dbConn.conn.prepareStatement(sql);
+                    pstmt.setString(1, pn);
+                    pstmt.setString(2, c);
+                    pstmt.setString(3, sn);
+                    pstmt.setInt(4, p);
+                    pstmt.setInt(5, sq  );
+                    pstmt.setInt(6, ts);
+                    pstmt.setString(7, cid);
+                    
+                    dbConn.conn.commit();
+                    int updatedRows = pstmt.executeUpdate();
+                    System.out.println("Rows updated: " + updatedRows);
+                    
+                    
+                    JOptionPane.showMessageDialog(this, "Record updated successfully.");
+                    
+                }
+                    
+            // Select();  // Refresh the table
+
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "Price and Stock Quantity must be valid numbers.");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error saving record:\n" + ex.getMessage());
+        }   
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_stock;
     private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_add1;
+    private javax.swing.JButton btn_add2;
     private javax.swing.JButton btn_close;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_save;
     private javax.swing.JLabel email_lbl4;
+    private javax.swing.JLabel fnamelbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField search_catalogue;
     private javax.swing.JSpinner stockadd;
     private javax.swing.JTable table_cm;
+    private javax.swing.JTable table_cm1;
     // End of variables declaration//GEN-END:variables
 }

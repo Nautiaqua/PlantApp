@@ -115,7 +115,6 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         invalid_add.setForeground(new java.awt.Color(158, 31, 31));
         mainpanel.add(invalid_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
 
-        address.setBackground(new java.awt.Color(255, 255, 255));
         address.setForeground(new java.awt.Color(72, 96, 51));
         address.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +128,6 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         confirmlbl1.setText("Account Type");
         mainpanel.add(confirmlbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, -1, -1));
 
-        cnum.setBackground(new java.awt.Color(255, 255, 255));
         cnum.setForeground(new java.awt.Color(72, 96, 51));
         cnum.setText("09");
         cnum.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +152,6 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         confirmlbl.setText("Address");
         mainpanel.add(confirmlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
 
-        confirmpass.setBackground(new java.awt.Color(255, 255, 255));
         confirmpass.setForeground(new java.awt.Color(72, 96, 51));
         confirmpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,15 +181,12 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         lnamelbl.setText("Last Name");
         mainpanel.add(lnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
 
-        lname.setBackground(new java.awt.Color(255, 255, 255));
         lname.setForeground(new java.awt.Color(72, 96, 51));
         mainpanel.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 130, 20));
 
-        email.setBackground(new java.awt.Color(255, 255, 255));
         email.setForeground(new java.awt.Color(72, 96, 51));
         mainpanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 280, 20));
 
-        fname.setBackground(new java.awt.Color(255, 255, 255));
         fname.setForeground(new java.awt.Color(72, 96, 51));
         fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +212,6 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         fnamelbl.setText("First Name");
         mainpanel.add(fnamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
-        pass.setBackground(new java.awt.Color(255, 255, 255));
         pass.setForeground(new java.awt.Color(72, 96, 51));
         pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,7 +286,7 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         jLabel3.setText("jLabel2");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, -130, -1, -1));
 
-        setSize(new java.awt.Dimension(1063, 765));
+        setSize(new java.awt.Dimension(1063, 766));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
