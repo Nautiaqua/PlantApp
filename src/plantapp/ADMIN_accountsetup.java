@@ -317,7 +317,7 @@ public class ADMIN_accountsetup extends javax.swing.JFrame {
         // Emailcheck
         if (email.getText().isEmpty()) {
             invalid_email.setText("Must be a valid email");
-        } else if (email.getText().equals("@gmail.com") || !email.getText().endsWith("@gmail.com")) {
+        } else if (email.getText().equals("@gmail.com") || !email.getText().endsWith("@gmail.com") || email.getText().equals("@ue.edu.ph") || !email.getText().endsWith("@ue.du.ph")) {
             invalid_email.setText("Must be a valid email");
         } else {
             emailcheck = true;

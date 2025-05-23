@@ -43,6 +43,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        abt_us = new javax.swing.JButton();
         mainpanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         email_lbl = new javax.swing.JLabel();
@@ -54,7 +55,6 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         adacc = new javax.swing.JButton();
         email_lbl1 = new javax.swing.JLabel();
         ctlgmngr1 = new javax.swing.JButton();
-        abt_us = new javax.swing.JButton();
         revenuerpt = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -69,6 +69,16 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
             .addGap(0, 260, Short.MAX_VALUE)
         );
 
+        abt_us.setBackground(new java.awt.Color(72, 96, 51));
+        abt_us.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        abt_us.setForeground(new java.awt.Color(255, 255, 255));
+        abt_us.setText("About Us");
+        abt_us.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abt_usActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,12 +88,12 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        mainpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 340, -1));
+        mainpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 340, -1));
 
         email_lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         email_lbl.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl.setText("Employee Portal");
-        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, 30));
+        mainpanel.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, 30));
 
         loginbtn1.setBackground(new java.awt.Color(72, 96, 51));
         loginbtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -94,7 +104,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 loginbtn1ActionPerformed(evt);
             }
         });
-        mainpanel.add(loginbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, 300, -1));
+        mainpanel.add(loginbtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 300, -1));
 
         ctlgmngr.setBackground(new java.awt.Color(72, 96, 51));
         ctlgmngr.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -105,17 +115,17 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 ctlgmngrActionPerformed(evt);
             }
         });
-        mainpanel.add(ctlgmngr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 300, -1));
+        mainpanel.add(ctlgmngr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 300, -1));
 
         email_lbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl2.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl2.setText("What do you want to manage?");
-        mainpanel.add(email_lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+        mainpanel.add(email_lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
 
         email_lbl3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email_lbl3.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl3.setText("Done with work?");
-        mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, -1, -1));
+        mainpanel.add(email_lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, -1, -1));
 
         accrec.setBackground(new java.awt.Color(72, 96, 51));
         accrec.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -142,7 +152,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
         email_lbl1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         email_lbl1.setForeground(new java.awt.Color(72, 96, 51));
         email_lbl1.setText("Portal Dashboard");
-        mainpanel.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+        mainpanel.add(email_lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
 
         ctlgmngr1.setBackground(new java.awt.Color(72, 96, 51));
         ctlgmngr1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -153,18 +163,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 ctlgmngr1ActionPerformed(evt);
             }
         });
-        mainpanel.add(ctlgmngr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 300, -1));
-
-        abt_us.setBackground(new java.awt.Color(72, 96, 51));
-        abt_us.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        abt_us.setForeground(new java.awt.Color(255, 255, 255));
-        abt_us.setText("About Us");
-        abt_us.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abt_usActionPerformed(evt);
-            }
-        });
-        mainpanel.add(abt_us, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 300, -1));
+        mainpanel.add(ctlgmngr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 300, -1));
 
         revenuerpt.setBackground(new java.awt.Color(72, 96, 51));
         revenuerpt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -175,7 +174,7 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
                 revenuerptActionPerformed(evt);
             }
         });
-        mainpanel.add(revenuerpt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 300, -1));
+        mainpanel.add(revenuerpt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 300, -1));
 
         getContentPane().add(mainpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 760));
 
