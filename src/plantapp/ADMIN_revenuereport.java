@@ -57,6 +57,8 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         refresh_btn = new javax.swing.JButton();
+        search_catalogue = new javax.swing.JTextField();
+        cartprice = new javax.swing.JLabel();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/LOGO_main.png"))); // NOI18N
 
@@ -116,6 +118,24 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
         });
         jPanel1.add(refresh_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 90, -1, 30));
 
+        search_catalogue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_catalogueActionPerformed(evt);
+            }
+        });
+        search_catalogue.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_catalogueKeyReleased(evt);
+            }
+        });
+        jPanel1.add(search_catalogue, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 360, 20));
+
+        cartprice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cartprice.setForeground(new java.awt.Color(72, 96, 51));
+        cartprice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cartprice.setText("Search by name or scientific name:");
+        jPanel1.add(cartprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 760));
 
         setSize(new java.awt.Dimension(1063, 765));
@@ -139,6 +159,51 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
         updateSR();
         refresh();
     }//GEN-LAST:event_refresh_btnActionPerformed
+
+    private void search_catalogueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_catalogueActionPerformed
+        String searchQuery = search_catalogue.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) revenue_table.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        revenue_table.setRowSorter(sorter);
+
+        if (searchQuery.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
+                @Override
+                public boolean include(Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                    String plantName = entry.getStringValue(1).toLowerCase();
+                    String scientificName = entry.getStringValue(3).toLowerCase();
+
+                    return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
+                }
+            };
+            sorter.setRowFilter(filter);
+        }
+    }//GEN-LAST:event_search_catalogueActionPerformed
+
+    private void search_catalogueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_catalogueKeyReleased
+        // TODO add your handling code here:
+        String searchQuery = search_catalogue.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) revenue_table.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        revenue_table.setRowSorter(sorter);
+
+        if (searchQuery.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            RowFilter<DefaultTableModel, Object> filter = new RowFilter<DefaultTableModel, Object>() {
+                @Override
+                public boolean include(RowFilter.Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                    String plantName = entry.getStringValue(1).toLowerCase();
+                    String scientificName = entry.getStringValue(3).toLowerCase();
+
+                    return plantName.contains(searchQuery) || scientificName.contains(searchQuery);
+                }
+            };
+            sorter.setRowFilter(filter);
+        }
+    }//GEN-LAST:event_search_catalogueKeyReleased
 
     /**
      * @param args the command line arguments
@@ -294,6 +359,7 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_close;
+    private javax.swing.JLabel cartprice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -304,6 +370,7 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
     private javax.swing.JLabel result;
     private javax.swing.JTable revenue_table;
     private javax.swing.JLabel saless;
+    private javax.swing.JTextField search_catalogue;
     // End of variables declaration//GEN-END:variables
 
 }
