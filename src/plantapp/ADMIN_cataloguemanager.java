@@ -108,6 +108,7 @@ public class ADMIN_cataloguemanager extends connection2 {
         search_catalogue = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        selects = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_cm = new javax.swing.JTable();
         btn_add = new javax.swing.JButton();
@@ -155,6 +156,19 @@ public class ADMIN_cataloguemanager extends connection2 {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Catalogue Manager");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 6, -1, 27));
+
+        selects.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Critical", "Fine" }));
+        selects.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectsItemStateChanged(evt);
+            }
+        });
+        selects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectsActionPerformed(evt);
+            }
+        });
+        jPanel3.add(selects, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 160, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 674, 93));
 
@@ -487,6 +501,22 @@ public class ADMIN_cataloguemanager extends connection2 {
        Select();
     }//GEN-LAST:event_btn_add2ActionPerformed
 
+    private void selectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectsActionPerformed
+        // TODO add your handling code here:    
+    }//GEN-LAST:event_selectsActionPerformed
+
+    private void selectsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectsItemStateChanged
+        // TODO add your handling code here:
+        int current = selects.getSelectedIndex();
+        if (current == 0) {
+            Select();
+        } else if (current == 1) {
+            CritSelect();
+        } else if (current == 2) {
+            FineSelect();
+        }
+    }//GEN-LAST:event_selectsItemStateChanged
+
     private void Select() {
         String[] columnNames = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"};
         PlantModels.setColumnIdentifiers(columnNames);
@@ -631,6 +661,72 @@ public class ADMIN_cataloguemanager extends connection2 {
             JOptionPane.showMessageDialog(this, "Error saving record:\n" + ex.getMessage());
         }   
     }
+    
+    private void CritSelect() {
+        String[] columnNames = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"};
+        PlantModels.setColumnIdentifiers(columnNames);
+        PlantModels.setRowCount(0);
+        
+        PlantModels2.setColumnIdentifiers(new String[]{
+    "CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"
+});
+
+        try {
+            Statement stmt6 = dbConn.conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs6 = stmt6.executeQuery("SELECT * FROM PLANT_CATALOGUE WHERE STOCK_QUANTITY < 10");
+
+            while (rs6.next()) {
+                String cid = rs6.getString("CATALOGUE_ID");
+                String pn = rs6.getString("PLANT_NAME");
+                String c = rs6.getString("CATEGORY");
+                String sn = rs6.getString("SCIENTIFIC_NAME");
+                int p = rs6.getInt("PRICE");
+                int sq = rs6.getInt("STOCK_QUANTITY");
+                int ts = rs6.getInt("TOTAL_STOCK");
+
+                table_cm.setVisible(true);
+                PlantModels.addRow(new Object[]{cid, pn, c, sn, p, sq, ts});
+            }
+            
+            setTableDesign();
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(ADMIN_cataloguemanager.this, "Error loading account records:\n" + err.getMessage());
+        }
+    }
+    
+    private void FineSelect() {
+        String[] columnNames = {"CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"};
+        PlantModels.setColumnIdentifiers(columnNames);
+        PlantModels.setRowCount(0);
+        
+        PlantModels2.setColumnIdentifiers(new String[]{
+    "CATALOGUE_ID", "PLANT_NAME", "CATEGORY", "SCIENTIFIC_NAME", "PRICE", "STOCK_QUANTITY", "TOTAL_STOCK"
+});
+
+        try {
+            Statement stmt6 = dbConn.conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs6 = stmt6.executeQuery("SELECT * FROM PLANT_CATALOGUE WHERE STOCK_QUANTITY >= 10");
+
+            while (rs6.next()) {
+                String cid = rs6.getString("CATALOGUE_ID");
+                String pn = rs6.getString("PLANT_NAME");
+                String c = rs6.getString("CATEGORY");
+                String sn = rs6.getString("SCIENTIFIC_NAME");
+                int p = rs6.getInt("PRICE");
+                int sq = rs6.getInt("STOCK_QUANTITY");
+                int ts = rs6.getInt("TOTAL_STOCK");
+
+                table_cm.setVisible(true);
+                PlantModels.addRow(new Object[]{cid, pn, c, sn, p, sq, ts});
+            }
+            
+            setTableDesign();
+
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(ADMIN_cataloguemanager.this, "Error loading account records:\n" + err.getMessage());
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_stock;
     private javax.swing.JButton btn_add;
@@ -649,6 +745,7 @@ public class ADMIN_cataloguemanager extends connection2 {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField search_catalogue;
+    private javax.swing.JComboBox<String> selects;
     private javax.swing.JSpinner stockadd;
     private javax.swing.JTable table_cm;
     private javax.swing.JTable table_cm1;
