@@ -278,7 +278,15 @@ public class ADMIN_dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_abt_usActionPerformed
 
     private void revenuerptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenuerptActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            ADMIN_revenuereport rev = new ADMIN_revenuereport();
+            this.dispose();
+            rev.setVisible(true);
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_revenuerptActionPerformed
 
     /**

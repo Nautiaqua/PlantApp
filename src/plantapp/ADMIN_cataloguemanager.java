@@ -43,9 +43,8 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         dbConn = new connection2();
         dbConn.ActivateConn();
         
-        db.activateConn();
-        
         System.out.println("Session email: " + ALL_login.sessionEmail);
+        
         table_cm.setModel(PlantModels);
         Select();
         
@@ -281,10 +280,14 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
 
-        ADMIN_dashboard dashboard = new ADMIN_dashboard();
-        db.closeConnection();
-        this.dispose();
-        dashboard.setVisible(true);
+        try {
+            ADMIN_dashboard dashboard = new ADMIN_dashboard();
+            dbConn.conn.close();
+            this.dispose();
+            dashboard.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_cataloguemanager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void search_catalogueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_catalogueActionPerformed

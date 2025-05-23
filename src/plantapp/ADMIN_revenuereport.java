@@ -124,9 +124,14 @@ public class ADMIN_revenuereport extends javax.swing.JFrame {
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
 
-        ADMIN_dashboard dashboard = new ADMIN_dashboard();
-        this.dispose();
-        dashboard.setVisible(true);
+        try {
+            ADMIN_dashboard dashboard = new ADMIN_dashboard();
+            this.dispose();
+            dashboard.setVisible(true);
+            dbConn.conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_revenuereport.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void refresh_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_btnActionPerformed

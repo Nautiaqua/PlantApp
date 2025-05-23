@@ -351,13 +351,13 @@ public class ADMIN_processorder extends javax.swing.JFrame {
                 
                 
                 refreshData();
-                cartModel.setRowCount(0);
             } catch (SQLException ex) {
                 Logger.getLogger(ADMIN_processorder.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             
         }
+        cartModel.setRowCount(0);
     }//GEN-LAST:event_finalizeActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
@@ -383,9 +383,14 @@ public class ADMIN_processorder extends javax.swing.JFrame {
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
 
-        ADMIN_dashboard dashboard = new ADMIN_dashboard();
-        this.dispose();
-        dashboard.setVisible(true);
+        try {
+            ADMIN_dashboard dashboard = new ADMIN_dashboard();
+            this.dispose();
+            dbConn.conn.close();
+            dashboard.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ADMIN_processorder.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void search_catalogueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_catalogueActionPerformed
