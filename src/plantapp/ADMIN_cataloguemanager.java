@@ -43,6 +43,8 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         dbConn = new connection2();
         dbConn.ActivateConn();
         
+        db.activateConn();
+        
         System.out.println("Session email: " + ALL_login.sessionEmail);
         table_cm.setModel(PlantModels);
         Select();
@@ -52,6 +54,8 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
                 btn_saveActionPerformed(evt);
             }
         });
+        
+        
         
     }
 
@@ -248,8 +252,6 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
     }
 
     try {
-        db.activateConn();
-
         String deleteSQL = "DELETE FROM PLANT_CATALOGUE WHERE CATALOGUE_ID = ?";
         try (PreparedStatement pstmt = db.conn.prepareStatement(deleteSQL)) {
             pstmt.setString(1, catalogueId);
@@ -273,16 +275,14 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Error deleting plant entry:\n" + ex.getMessage());
         ex.printStackTrace();
-    } finally {
-        db.closeConnection();
-    }
-
     Select(); 
+        }
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
 
         ADMIN_dashboard dashboard = new ADMIN_dashboard();
+        db.closeConnection();
         this.dispose();
         dashboard.setVisible(true);
     }//GEN-LAST:event_btn_closeActionPerformed
@@ -333,8 +333,6 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         int sq = Integer.parseInt(table_cm.getValueAt(selectedRow, 5).toString());
         int ts = Integer.parseInt(table_cm.getValueAt(selectedRow, 6).toString());
 
-        db.activateConn();
-
         // Optional: turn off auto-commit (if not already)
         db.conn.setAutoCommit(false);
 
@@ -350,17 +348,8 @@ public class ADMIN_cataloguemanager extends javax.swing.JFrame {
         pstmt.setInt(7, ts);
 
         int rowsInserted = pstmt.executeUpdate();
-
-        if (rowsInserted > 0) {
-            db.conn.commit();  // Commit transaction
-
-            JOptionPane.showMessageDialog(this, "Record saved successfully.");
-            Select();  // Refresh the table
-        } else {
-            JOptionPane.showMessageDialog(this, "Failed to save record.");
-        }
-
-        db.closeConnection();
+        JOptionPane.showMessageDialog(this, "Record saved successfully.");
+        Select();  // Refresh the table
 
     } catch (NumberFormatException nfe) {
         JOptionPane.showMessageDialog(this, "Price and Stock Quantity must be valid numbers.");
